@@ -31,6 +31,7 @@ Este es el catálogo de entrada principal (Discovery Phase 1). Los siguientes no
 - [Índice de Precios al Consumidor e Inflación - INE](/nodes/indicadores-inflacion/index.md)
 - [Cartera de Créditos del Sistema Financiero](/nodes/cartera-creditos/index.md)
 - [Mercado Cambiario P2P BOB/USDT](/nodes/p2p-bob-exchange/index.md)
+- [Tipos de Cambio en Bolivia (Mercado Paralelo, Bancos y BCB)](/nodes/dolares/index.md)
 - [Catálogo e Inventario Estadístico - INE](/nodes/catalogo-ine/index.md)
 
 ### Clima, Medio Ambiente y Geociencias
