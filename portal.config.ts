@@ -37,7 +37,7 @@ export const config: PortalConfig = {
   organization: {
     name: "Datos La Paz",
     slug: "datoslapaz",
-    url: "https://datoslapaz.github.io",
+    url: "https://datosbolivia.github.io/lapaz",
     github: "https://github.com/datosbolivia/catalogo-lapaz",
     description: "Iniciativa colaborativa y abierta de datos públicos y estadísticas de la Ciudad de La Paz."
   },
@@ -45,8 +45,8 @@ export const config: PortalConfig = {
     title: "Datos La Paz",
     description: "Portal catálogo de Datos Abiertos de la Ciudad de La Paz",
     tagline: "Datos abiertos y estadísticas municipales para la comunidad paceña.",
-    url: "https://datoslapaz.github.io",
-    base: "/"
+    url: "https://datosbolivia.github.io/lapaz",
+    base: "/lapaz"
   },
   pwa: {
     enabled: true,
@@ -62,8 +62,8 @@ export const config: PortalConfig = {
     enableLocalProcessing: false
   },
   nav: [
-    { label: "Catálogo", key: "nav.home", path: "/" },
-    { label: "Acerca de", key: "nav.about", path: "/about" },
-    { label: "Docs", key: "nav.docs", path: "/docs" }
+    { label: "Catálogo", key: "nav.home", path: "/lapaz/" },
+    { label: "Acerca de", key: "nav.about", path: "/lapaz/about" },
+    { label: "Docs", key: "nav.docs", path: "/lapaz/docs" }
   ]
 };

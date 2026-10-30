@@ -18,6 +18,7 @@ export function getStaticPaths() {
 }
 
 const { doc, dataset } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const renderedHtml = renderMarkdown(doc.bodyMarkdown, { datasetSlug: dataset.slug });
 
 const skos = doc.frontmatter.skos || {};
@@ -26,11 +27,9 @@ const skos = doc.frontmatter.skos || {};
 <BaseLayout title={`${doc.title} — ${dataset.title}`}>
   <!-- Breadcrumbs -->
   <nav style="display: flex; gap: 0.5rem; align-items: center; font-size: 0.825rem; color: var(--color-text-muted); margin-bottom: 1.5rem; flex-wrap: wrap;">
-    <a href="/" style="color: inherit; text-decoration: none;" data-i18n="nav.home">Inicio</a>
+    <a href={`${base}/`} style="color: inherit; text-decoration: none;" data-i18n="nav.home">Catálogo</a>
     <span>/</span>
-    <a href="/" style="color: inherit; text-decoration: none;" data-i18n="nav.home">Catálogo</a>
-    <span>/</span>
-    <a href={`/datasets/${dataset.slug}`} style="color: inherit; text-decoration: none;">{dataset.title}</a>
+    <a href={`${base}/datasets/${dataset.slug}`} style="color: inherit; text-decoration: none;">{dataset.title}</a>
     <span>/</span>
     <span style="color: var(--color-text); font-weight: 500;">{doc.title}</span>
   </nav>
@@ -45,10 +44,10 @@ const skos = doc.frontmatter.skos || {};
         </div>
 
         <div style="display: flex; gap: 0.5rem;">
-          <a href={`/datasets/${dataset.slug}`} class="btn btn-secondary btn-sm">
+          <a href={`${base}/datasets/${dataset.slug}`} class="btn btn-secondary btn-sm">
             &larr; <span data-i18n="dataset.back_to_dataset">Volver al Dataset</span>
           </a>
-          <a href={`/raw/nodes/${dataset.slug}/${doc.relativePath}`} target="_blank" class="btn btn-secondary btn-sm" title="Ver archivo Markdown crudo">
+          <a href={`${base}/raw/nodes/${dataset.slug}/${doc.relativePath}`} target="_blank" class="btn btn-secondary btn-sm" title="Ver archivo Markdown crudo">
             <span data-i18n="explorer.raw_md">Ver Markdown Raw</span>
           </a>
         </div>

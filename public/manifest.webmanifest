@@ -2,13 +2,14 @@
   "name": "Datos La Paz - Portal de Datos",
   "short_name": "DatosLaPaz",
   "description": "Catálogo de datos abiertos de la Ciudad de La Paz para la comunidad y Agentes de IA",
-  "start_url": "/",
+  "start_url": "/lapaz/",
+  "scope": "/lapaz/",
   "display": "standalone",
   "background_color": "#f8fafc",
   "theme_color": "#9e1b2f",
   "icons": [
     {
-      "src": "/favicon.svg",
+      "src": "/lapaz/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"

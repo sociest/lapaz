@@ -9,6 +9,8 @@
  *  - Enlaces relativos a documentos del dataset y enlaces externos seguros con iconos Lucide
  */
 
+import { config } from '../../portal.config';
+
 export interface RenderMarkdownOptions {
   datasetSlug?: string;
   currentDocPath?: string;
@@ -236,9 +238,10 @@ function processInline(text: string, datasetSlug: string): string {
     }
 
     if (datasetSlug) {
+      const base = config.site.base.replace(/\/$/, '');
       const cleanPath = cleanTarget.replace(/^\.\//, '').replace(/\.md$/, '');
       const targetTabId = `doc-${cleanPath.replace(/\//g, '-')}`;
-      return `<a href="/datasets/${datasetSlug}/${cleanPath}" data-doc-target="${targetTabId}" class="internal-doc-link" title="Abrir nota: ${cleanTarget}">${label}</a>`;
+      return `<a href="${base}/datasets/${datasetSlug}/${cleanPath}" data-doc-target="${targetTabId}" class="internal-doc-link" title="Abrir nota: ${cleanTarget}">${label}</a>`;
     }
 
     return `<a href="${cleanTarget}" class="internal-doc-link">${label}</a>`;
@@ -260,10 +263,11 @@ function processInline(text: string, datasetSlug: string): string {
 
     // 3. Enlace relativo a archivo Markdown del dataset (concepts/..., knowledge/..., etc.)
     if (trimmedUrl.endsWith('.md')) {
+      const base = config.site.base.replace(/\/$/, '');
       const cleanPath = trimmedUrl.replace(/^\.\//, '').replace(/\.md$/, '');
       if (datasetSlug) {
         const targetTabId = `doc-${cleanPath.replace(/\//g, '-')}`;
-        return `<a href="/datasets/${datasetSlug}/${cleanPath}" data-doc-target="${targetTabId}" class="internal-doc-link" title="Ver documento de referencia: ${cleanPath}">${label}</a>`;
+        return `<a href="${base}/datasets/${datasetSlug}/${cleanPath}" data-doc-target="${targetTabId}" class="internal-doc-link" title="Ver documento de referencia: ${cleanPath}">${label}</a>`;
       }
       return `<a href="${trimmedUrl}" class="internal-doc-link">${label}</a>`;
     }

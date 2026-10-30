@@ -14,10 +14,11 @@ export function getStaticPaths() {
 }
 
 const { dataset } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const resources = dataset.allResources || [];
 const referenceDocs = dataset.referenceDocs || [];
 const contracts = dataset.contracts || [];
-const rawIndexUrl = dataset.remoteUrl || `/raw/nodes/${dataset.slug}/index.md`;
+const rawIndexUrl = dataset.remoteUrl || `${base}/raw/nodes/${dataset.slug}/index.md`;
 
 // Renderizar el contenido completo de index.md con enlaces reescritos
 const renderedIndexHtml = renderMarkdown(dataset.bodyMarkdown, { datasetSlug: dataset.slug });
@@ -110,7 +111,7 @@ function getCleanResourceName(res: any): string {
                 class="obsidian-file-item" 
                 data-target={`tab-${doc.tabId}`}
                 data-path={`${dataset.slug}/${doc.relativePath}`}
-                data-raw={`/raw/nodes/${dataset.slug}/${doc.relativePath}`}
+                data-raw={`${base}/raw/nodes/${dataset.slug}/${doc.relativePath}`}
                 title={fileName}
               >
                 <svg class="file-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -140,7 +141,7 @@ function getCleanResourceName(res: any): string {
                   class="obsidian-file-item" 
                   data-target={`tab-${doc.tabId}`}
                   data-path={`${dataset.slug}/${doc.relativePath}`}
-                  data-raw={`/raw/nodes/${dataset.slug}/${doc.relativePath}`}
+                  data-raw={`${base}/raw/nodes/${dataset.slug}/${doc.relativePath}`}
                   title={fileName}
                 >
                   <svg class="file-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -223,9 +224,7 @@ function getCleanResourceName(res: any): string {
           </button>
 
           <nav class="obsidian-pane-breadcrumb" id="pane-breadcrumb" aria-label="Ruta de navegación">
-            <a href="/" class="obsidian-crumb-link obsidian-crumb-root" data-i18n="nav.home">Inicio</a>
-            <span class="obsidian-crumb-sep obsidian-crumb-root">/</span>
-          <a href="/" class="obsidian-crumb-link obsidian-crumb-root" data-i18n="nav.home">Catálogo</a>
+            <a href={`${base}/`} class="obsidian-crumb-link obsidian-crumb-root" data-i18n="nav.home">Catálogo</a>
             <span class="obsidian-crumb-sep obsidian-crumb-root">/</span>
             <span class="obsidian-crumb-slug" title={`Dataset: ${dataset.slug}`}>{dataset.slug}</span>
             <span class="obsidian-crumb-sep">/</span>

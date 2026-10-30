@@ -9,8 +9,8 @@ const shouldUseLocalSdk = fs.existsSync(localSdkSrc);
 
 export default defineConfig({
   output: 'static',
-  site: 'https://datoslapaz.github.io',
-  base: '/',
+  site: 'https://datosbolivia.github.io',
+  base: '/lapaz',
   build: {
     format: 'file'
   },

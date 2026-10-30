@@ -3,18 +3,20 @@ import { config } from '../../portal.config';
 import { translations } from '../lib/i18n';
 
 const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 function isActive(path: string) {
-  if (path === '/' && currentPath === '/') return true;
-  if (path !== '/' && currentPath.startsWith(path)) return true;
+  if (path === `${base}/` && (currentPath === `${base}/` || currentPath === base)) return true;
+  if (path !== `${base}/` && currentPath.startsWith(path)) return true;
   return false;
 }
 ---
 
 <header class="site-header">
   <div class="container nav-container">
-    <a href="/" class="logo-area" aria-label={config.organization.name}>
+    <a href={`${base}/`} class="logo-area" aria-label={config.organization.name}>
       <img
-        src="/logo.jpg"
+        src={`${base}/logo.jpg`}
         alt={config.organization.name}
         class="logo-image"
         width="32"
@@ -77,7 +79,7 @@ function isActive(path: string) {
       </button>
 
       <!-- Enlace canónico a llms.txt sin badges -->
-      <a href="/llms.txt" class="nav-llm-link" title="Especificación llms.txt para Agentes de IA" data-i18n-title="nav.llms_title">
+      <a href={`${base}/llms.txt`} class="nav-llm-link" title="Especificación llms.txt para Agentes de IA" data-i18n-title="nav.llms_title">
         llms.txt
       </a>
 

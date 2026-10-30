@@ -1,5 +1,7 @@
 ---
 import { config } from '../../portal.config';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <footer class="site-footer">
@@ -14,7 +16,7 @@ import { config } from '../../portal.config';
     </div>
 
     <div style="display: flex; gap: 1rem; align-items: center; font-size: 0.825rem;">
-      <a href="/docs" data-i18n="nav.docs">
+      <a href={`${base}/docs`} data-i18n="nav.docs">
         Documentación
       </a>
       <span>•</span>
@@ -22,7 +24,7 @@ import { config } from '../../portal.config';
         Configuración
       </button>
       <span>•</span>
-      <a href="/llms.txt">
+      <a href={`${base}/llms.txt`}>
         llms.txt
       </a>
     </div>

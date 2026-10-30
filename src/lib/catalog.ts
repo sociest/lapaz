@@ -260,11 +260,16 @@ export function getAllDatasets(): DatasetNode[] {
 
     // 3. Consolidar TODOS los recursos (desempaquetando zips y contenedores internos)
     const allResources: DataResource[] = [];
+    const base = '/lapaz';
     if (datapackage?.resources && Array.isArray(datapackage.resources)) {
       datapackage.resources = normalizeManifestResources(datapackage.resources);
       for (const res of datapackage.resources) {
-        if (res.path && !res.path.startsWith('http://') && !res.path.startsWith('https://') && !res.path.startsWith('/')) {
-          res.path = `/raw/nodes/${slug}/${res.path.replace(/^\.\//, '')}`;
+        if (res.path && !res.path.startsWith('http://') && !res.path.startsWith('https://')) {
+          if (!res.path.startsWith('/')) {
+            res.path = `${base}/raw/nodes/${slug}/${res.path.replace(/^\.\//, '')}`;
+          } else if (!res.path.startsWith(base)) {
+            res.path = `${base}${res.path}`;
+          }
         }
       }
       allResources.push(...datapackage.resources);
@@ -272,8 +277,12 @@ export function getAllDatasets(): DatasetNode[] {
     if (Array.isArray(frontmatter.resources)) {
       const normFm = normalizeManifestResources(frontmatter.resources);
       for (const res of normFm) {
-        if (res.path && !res.path.startsWith('http://') && !res.path.startsWith('https://') && !res.path.startsWith('/')) {
-          res.path = `/raw/nodes/${slug}/${res.path.replace(/^\.\//, '')}`;
+        if (res.path && !res.path.startsWith('http://') && !res.path.startsWith('https://')) {
+          if (!res.path.startsWith('/')) {
+            res.path = `${base}/raw/nodes/${slug}/${res.path.replace(/^\.\//, '')}`;
+          } else if (!res.path.startsWith(base)) {
+            res.path = `${base}${res.path}`;
+          }
         }
         if (!allResources.some(r => r.name === res.name)) {
           allResources.push(res);

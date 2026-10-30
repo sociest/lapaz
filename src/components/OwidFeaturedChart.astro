@@ -2,6 +2,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 // Cargar y pre-procesar datos desde los CSVs soberanos en knowledge/
 const rootDir = process.cwd();
 
@@ -241,10 +243,10 @@ const macroOrder = ['Max Paredes', 'Cotahuma', 'Periférica', 'Sur', 'San Antoni
           <strong>Fuente:</strong> GAMLP — Red MoniCA (Monitoreo de Calidad del Aire)
         </div>
         <div class="owid-actions">
-          <a href="/datasets/concentracion-en-promedio-anual-de-material-particulado-en-suspension-pm10-segun-esta" class="owid-action-link">
+          <a href={`${base}/datasets/concentracion-en-promedio-anual-de-material-particulado-en-suspension-pm10-segun-esta`} class="owid-action-link">
             <span>Explorar este dataset completo</span> &rarr;
           </a>
-          <a href="/raw/nodes/concentracion-en-promedio-anual-de-material-particulado-en-suspension-pm10-segun-esta/data.csv" class="owid-action-link" download>
+          <a href={`${base}/raw/nodes/concentracion-en-promedio-anual-de-material-particulado-en-suspension-pm10-segun-esta/data.csv`} class="owid-action-link" download>
             <span>Descargar CSV</span>
           </a>
         </div>
@@ -352,10 +354,10 @@ const macroOrder = ['Max Paredes', 'Cotahuma', 'Periférica', 'Sur', 'San Antoni
           <strong>Fuente:</strong> GAMLP — Sistema de Información Territorial (SIT) y Dirección de Administración Territorial
         </div>
         <div class="owid-actions">
-          <a href="/datasets/aprobacion-de-permisos-de-construccion-segun-macrodistrito" class="owid-action-link">
+          <a href={`${base}/datasets/aprobacion-de-permisos-de-construccion-segun-macrodistrito`} class="owid-action-link">
             <span>Explorar este dataset completo</span> &rarr;
           </a>
-          <a href="/raw/nodes/aprobacion-de-permisos-de-construccion-segun-macrodistrito/data.csv" class="owid-action-link" download>
+          <a href={`${base}/raw/nodes/aprobacion-de-permisos-de-construccion-segun-macrodistrito/data.csv`} class="owid-action-link" download>
             <span>Descargar CSV</span>
           </a>
         </div>
@@ -461,10 +463,10 @@ const macroOrder = ['Max Paredes', 'Cotahuma', 'Periférica', 'Sur', 'San Antoni
           <strong>Fuente:</strong> GAMLP — Dirección de Investigación e Información Estadística sobre base de INE
         </div>
         <div class="owid-actions">
-          <a href="/datasets/poblacion-segun-macrodistrito-y-distrito" class="owid-action-link">
+          <a href={`${base}/datasets/poblacion-segun-macrodistrito-y-distrito`} class="owid-action-link">
             <span>Explorar este dataset completo</span> &rarr;
           </a>
-          <a href="/raw/nodes/poblacion-segun-macrodistrito-y-distrito/data.csv" class="owid-action-link" download>
+          <a href={`${base}/raw/nodes/poblacion-segun-macrodistrito-y-distrito/data.csv`} class="owid-action-link" download>
             <span>Descargar CSV</span>
           </a>
         </div>

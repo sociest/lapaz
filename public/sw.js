@@ -1,12 +1,10 @@
-const CACHE_NAME = 'datamesh-bolivia-v1';
+const CACHE_NAME = 'datoslapaz-v1';
 const STATIC_ASSETS = [
-  '/',
-  '/datasets',
-  '/about',
-  '/docs',
-  '/download',
-  '/favicon.svg',
-  '/manifest.webmanifest'
+  '/lapaz/',
+  '/lapaz/about',
+  '/lapaz/docs',
+  '/lapaz/favicon.svg',
+  '/lapaz/manifest.webmanifest'
 ];
 
 self.addEventListener('install', (event) => {

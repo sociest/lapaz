@@ -17,3 +17,5 @@
 - Eliminación de ruta redundante `/datasets` (`src/pages/datasets/index.astro`).
 - Modularización del listado interactivo en componente reutilizable `src/components/DatasetList.astro`.
 - Actualización de navegación principal y breadcrumbs dirigiendo al catálogo unificado (`/`).
+- Configuración de despliegue estático bajo subdirectorio soberano: base `/lapaz` y site `https://datosbolivia.github.io` en `astro.config.mjs` y `portal.config.ts`.
+- Adaptación integral de rutas canónicas, assets, breadcrumbs, enlaces editoriales, `manifest.webmanifest`, service worker y endpoints `llms.txt` con prefijo base `/lapaz/`.

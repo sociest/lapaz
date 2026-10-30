@@ -16,6 +16,7 @@ const format = dataset.datapackage?.resources?.[0]?.format || 'CSV';
 
 // Gráfico automático del mosaico
 const chartInfo = (mosaicCharts as Record<string, any>)[dataset.slug] || null;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 let svgWidth = 280;
 let svgHeight = 90;
@@ -74,7 +75,7 @@ if (chartInfo && chartInfo.items && chartInfo.items.length >= 2) {
     </div>
 
     <h3 class="dataset-card-title">
-      <a href={`/datasets/${dataset.slug}`}>
+      <a href={`${base}/datasets/${dataset.slug}`}>
         {dataset.title}
       </a>
     </h3>
@@ -137,7 +138,7 @@ if (chartInfo && chartInfo.items && chartInfo.items.length >= 2) {
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
       <span>{resCount} recurso(s)</span>
     </span>
-    <a href={`/datasets/${dataset.slug}`} class="btn btn-secondary btn-sm dataset-card-action">
+    <a href={`${base}/datasets/${dataset.slug}`} class="btn btn-secondary btn-sm dataset-card-action">
       <span data-i18n="card.explore">Explorar Datos</span>
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
     </a>
