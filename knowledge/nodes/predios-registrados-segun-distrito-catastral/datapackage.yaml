@@ -1,0 +1,35 @@
+name: predios-registrados-segun-distrito-catastral
+title: PREDIOS REGISTRADOS SEGUN DISTRITO CATASTRAL, 2010-2024 (p)
+description: Entre 2010 a 2024 se han registrado más de 183 mil predios, siendo 2015
+  el año con la mayor cantidad de estos, alcanzando más de 28 mil predios registrados.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2010-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: PREDIOS REGISTRADOS SEGUN DISTRITO CATASTRAL, 2010-2024 (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: DISTRITO CATASTRAL
+      type: string
+      description: 'Variable: DISTRITO CATASTRAL'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: PREDIOS REGISTRADOS
+      type: integer
+      description: 'Variable: PREDIOS REGISTRADOS'

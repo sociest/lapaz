@@ -1,0 +1,38 @@
+name: poblacion-por-sexo-segun-grupos-de-edad-pry
+title: POBLACION POR SEXO SEGUN GRUPOS DE EDAD, 1992, 2001, 2012 y 2025 (pry)
+description: Para 2023 se proyecta que la población del Municipio de La Paz supere
+  el millón de habitantes.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '1992-01-01T00:00:00Z'
+  end: '2001-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: POBLACION POR SEXO SEGUN GRUPOS DE EDAD, 1992, 2001, 2012 y 2025 (pry)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: GRUPOS DE EDAD
+      type: string
+      description: 'Variable: GRUPOS DE EDAD'
+    - name: SEXO
+      type: string
+      description: 'Variable: SEXO'
+    - name: AÑO
+      type: string
+      description: 'Variable: AÑO'
+    - name: POBLACIÓN
+      type: integer
+      description: 'Variable: POBLACIÓN'

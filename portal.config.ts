@@ -35,37 +35,36 @@ export interface PortalConfig {
 
 export const config: PortalConfig = {
   organization: {
-    name: "Datos Bolivia",
-    slug: "datos-bolivia",
-    url: "https://datos-bolivia.github.io",
-    github: "https://github.com/datosbolivia/catalogo-datamesh",
-    description: "Iniciativa colaborativa y abierta de datos federados de Bolivia."
+    name: "Datos La Paz",
+    slug: "datoslapaz",
+    url: "https://datoslapaz.github.io",
+    github: "https://github.com/datosbolivia/catalogo-lapaz",
+    description: "Iniciativa colaborativa y abierta de datos públicos y estadísticas de la Ciudad de La Paz."
   },
   site: {
-    title: "Datos Bolivia",
-    description: "Portal catálogo de Datos Abiertos de Bolivia",
-    tagline: "Datos abiertos y descentralizados para la comunidad.",
-    url: "https://datos-bolivia.github.io",
+    title: "Datos La Paz",
+    description: "Portal catálogo de Datos Abiertos de la Ciudad de La Paz",
+    tagline: "Datos abiertos y estadísticas municipales para la comunidad paceña.",
+    url: "https://datoslapaz.github.io",
     base: "/"
   },
   pwa: {
     enabled: true,
-    name: "DataMesh Bolivia - Portal de Datos",
-    shortName: "DatosBolivia",
-    themeColor: "#0b243f",
-    backgroundColor: "#fafafa"
+    name: "Datos La Paz - Portal de Datos",
+    shortName: "DatosLaPaz",
+    themeColor: "#9e1b2f",
+    backgroundColor: "#f8fafc"
   },
   desktopApp: {
-    enabled: true,
-    name: "DataMesh Bolivia Desktop",
-    downloadUrl: "https://github.com/datosbolivia/catalogo-datamesh/releases",
-    enableLocalProcessing: true
+    enabled: false,
+    name: "Datos La Paz Desktop",
+    downloadUrl: "https://github.com/datosbolivia/catalogo-lapaz/releases",
+    enableLocalProcessing: false
   },
   nav: [
     { label: "Inicio", key: "nav.home", path: "/" },
     { label: "Datasets", key: "nav.datasets", path: "/datasets" },
     { label: "Acerca de", key: "nav.about", path: "/about" },
-    { label: "Docs", key: "nav.docs", path: "/docs" },
-    { label: "Descargas", key: "nav.download", path: "/download" }
+    { label: "Docs", key: "nav.docs", path: "/docs" }
   ]
 };

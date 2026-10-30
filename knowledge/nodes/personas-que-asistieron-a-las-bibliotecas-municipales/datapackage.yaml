@@ -1,0 +1,36 @@
+name: personas-que-asistieron-a-las-bibliotecas-municipales
+title: PERSONAS QUE ASISTIERON A LAS BIBLIOTECAS MUNICIPALES, 2010-2024 (p)
+description: En 2024 mas de 206 mil personas asistieron a Bibliotecas Municipales
+  ubicadas en el Municipio de La Paz. y 449 realizaron el circuito por diferentes
+  salas y bibliotecas municipales, mediante visitas guiadas.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2010-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: PERSONAS QUE ASISTIERON A LAS BIBLIOTECAS MUNICIPALES, 2010-2024 (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: BIBLIOTECAS MUNICIPALES
+      type: string
+      description: 'Variable: BIBLIOTECAS MUNICIPALES'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: PERSONAS QUE ASISTIERON A LAS BIBLIOTECAS
+      type: integer
+      description: 'Variable: PERSONAS QUE ASISTIERON A LAS BIBLIOTECAS'

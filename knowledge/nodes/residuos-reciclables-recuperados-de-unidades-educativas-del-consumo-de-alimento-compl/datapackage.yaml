@@ -1,0 +1,37 @@
+name: residuos-reciclables-recuperados-de-unidades-educativas-del-consumo-de-alimento-compl
+title: RESIDUOS RECICLABLES RECUPERADOS DE UNIDADES EDUCATIVAS DEL CONSUMO DE ALIMENTO
+  COMPLEMENTARIO ESCOLAR PARA RECICLAJE, 2015-2024 (p)
+description: En 2024 se recolecto 14.549 kg, de residuos reciclables recuperados de
+  unidades educativas del consumo de alimentos complementarios.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2015-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: RESIDUOS RECICLABLES RECUPERADOS DE UNIDADES EDUCATIVAS DEL CONSUMO DE ALIMENTO
+    COMPLEMENTARIO ESCOLAR PARA RECICLAJE, 2015-2024 (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: MACRODISTRITO
+      type: string
+      description: 'Variable: MACRODISTRITO'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: En kilogramos
+      type: integer
+      description: 'Variable: En kilogramos'

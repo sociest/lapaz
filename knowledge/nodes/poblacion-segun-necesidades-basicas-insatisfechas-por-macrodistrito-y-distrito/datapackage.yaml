@@ -1,0 +1,47 @@
+name: poblacion-segun-necesidades-basicas-insatisfechas-por-macrodistrito-y-distrito
+title: POBLACION SEGUN NECESIDADES BASICAS INSATISFECHAS POR MACRODISTRITO Y DISTRITO,
+  2018, 2024
+description: En 2024 la población según necesidades básicas insatisfechas en el municipio
+  de La Paz alcanzó un 57%.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2018-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: POBLACION SEGUN NECESIDADES BASICAS INSATISFECHAS POR MACRODISTRITO Y DISTRITO,
+    2018, 2024
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: MACRODISTRITO
+      type: string
+      description: 'Variable: MACRODISTRITO'
+    - name: DISTRITO
+      type: string
+      description: 'Variable: DISTRITO'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: TIPOS
+      type: string
+      description: 'Variable: TIPOS'
+    - name: DESCRIPCIÓN
+      type: string
+      description: 'Variable: DESCRIPCIÓN'
+    - name: POBLACIÓN SEGÚN NECESIDADES BÁSICAS INSATISFECHAS (En porcentaje)
+      type: string
+      description: 'Variable: POBLACIÓN SEGÚN NECESIDADES BÁSICAS INSATISFECHAS (En
+        porcentaje)'

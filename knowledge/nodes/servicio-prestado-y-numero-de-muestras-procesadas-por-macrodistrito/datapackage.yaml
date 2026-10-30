@@ -1,0 +1,41 @@
+name: servicio-prestado-y-numero-de-muestras-procesadas-por-macrodistrito
+title: SERVICIO PRESTADO Y NÚMERO DE MUESTRAS PROCESADAS POR MACRODISTRITO, 2015-2024
+  (p)
+description: En 2024 se han procesado 2.719 muestras procesadas en el municipio de
+  La Paz, siendo el macrodistrito Sur el que tiene el mayor número de estas muestras
+  procesadas (1.163 muestras)
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2015-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: SERVICIO PRESTADO Y NÚMERO DE MUESTRAS PROCESADAS POR MACRODISTRITO, 2015-2024
+    (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: MACRODISTRITOS
+      type: string
+      description: 'Variable: MACRODISTRITOS'
+    - name: DESCRIPCIÓN
+      type: string
+      description: 'Variable: DESCRIPCIÓN'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: NÚMERO DE MUESTRAS
+      type: integer
+      description: 'Variable: NÚMERO DE MUESTRAS'

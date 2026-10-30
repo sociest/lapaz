@@ -1,0 +1,36 @@
+name: participantes-en-actividades-y-programas-especiales-en-museos
+title: PARTICIPANTES EN ACTIVIDADES Y PROGRAMAS ESPECIALES EN MUSEOS, 2010-2024 (p)
+description: En 2024 participaron más de 57 mil personas en diferentes actividades
+  y programas especiales de museos.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2010-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: PARTICIPANTES EN ACTIVIDADES Y PROGRAMAS ESPECIALES EN MUSEOS, 2010-2024 (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: ACTIVIDADES Y PROGRAMAS ESPECIALES EN MUSEOS
+      type: string
+      description: 'Variable: ACTIVIDADES Y PROGRAMAS ESPECIALES EN MUSEOS'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: PARTICIPANTES EN ACTIVIDADES Y PROGRAMAS ESPECIALES EN MUSEOS
+      type: integer
+      description: 'Variable: PARTICIPANTES EN ACTIVIDADES Y PROGRAMAS ESPECIALES
+        EN MUSEOS'

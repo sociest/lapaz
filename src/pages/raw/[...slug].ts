@@ -59,6 +59,7 @@ export const GET: APIRoute = async ({ props }) => {
   if (fullPath.endsWith('.md')) contentType = 'text/markdown; charset=utf-8';
   else if (fullPath.endsWith('.json')) contentType = 'application/json; charset=utf-8';
   else if (fullPath.endsWith('.yaml') || fullPath.endsWith('.yml')) contentType = 'text/yaml; charset=utf-8';
+  else if (fullPath.endsWith('.csv')) contentType = 'text/csv; charset=utf-8';
 
   return new Response(content, {
     headers: {

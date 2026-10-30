@@ -64,8 +64,7 @@ const canonicalRoutes = [
   { path: '/datasets', file: 'src/pages/datasets/index.astro' },
   { path: '/datasets/[slug]', file: 'src/pages/datasets/[slug].astro' },
   { path: '/about', file: 'src/pages/about.astro' },
-  { path: '/docs', file: 'src/pages/docs/index.astro' },
-  { path: '/download', file: 'src/pages/download.astro' }
+  { path: '/docs', file: 'src/pages/docs/index.astro' }
 ];
 
 for (const r of canonicalRoutes) {

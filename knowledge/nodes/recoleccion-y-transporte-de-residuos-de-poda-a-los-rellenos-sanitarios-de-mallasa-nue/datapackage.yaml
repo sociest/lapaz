@@ -1,0 +1,37 @@
+name: recoleccion-y-transporte-de-residuos-de-poda-a-los-rellenos-sanitarios-de-mallasa-nue
+title: RECOLECCIÓN Y TRANSPORTE DE RESIDUOS DE PODA, A LOS RELLENOS SANITARIOS DE
+  MALLASA, NUEVO JARDIN ALPACOMA Y SAK´A CHURU, 2011-2024 (p)
+description: En 2024 se recolectaron y transportaron 3.673 toneladas de residuos de
+  poda
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2011-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: RECOLECCIÓN Y TRANSPORTE DE RESIDUOS DE PODA, A LOS RELLENOS SANITARIOS DE
+    MALLASA, NUEVO JARDIN ALPACOMA Y SAK´A CHURU, 2011-2024 (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: MES
+      type: string
+      description: 'Variable: MES'
+    - name: TONELADA
+      type: integer
+      description: 'Variable: TONELADA'

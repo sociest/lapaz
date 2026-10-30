@@ -1,0 +1,41 @@
+name: percepcion-sobre-la-utilidad-del-desayuno-escolar-para-la-nutricion-segun-macrodistri
+title: PERCEPCION SOBRE LA UTILIDAD DEL DESAYUNO ESCOLAR PARA LA NUTRICION, SEGUN
+  MACRODISTRITO, 2011-2016
+description: La percepción del desayuno escolar en 2016 es de un 72% de aprobación
+  a nivel municipal.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2011-01-01T00:00:00Z'
+  end: '2016-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: PERCEPCION SOBRE LA UTILIDAD DEL DESAYUNO ESCOLAR PARA LA NUTRICION, SEGUN
+    MACRODISTRITO, 2011-2016
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: MACRODISTRITO
+      type: string
+      description: 'Variable: MACRODISTRITO'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: DESCRIPCIÓN
+      type: string
+      description: 'Variable: DESCRIPCIÓN'
+    - name: PERCEPCIÓN SOBRE LA UTILIDAD DEL DESAYUNO ESCOLAR PARA LA NUTRICIÓN
+      type: integer
+      description: 'Variable: PERCEPCIÓN SOBRE LA UTILIDAD DEL DESAYUNO ESCOLAR PARA
+        LA NUTRICIÓN'

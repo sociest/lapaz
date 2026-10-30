@@ -19,8 +19,6 @@ const renderedHtml = renderMarkdown(doc.bodyMarkdown);
 let rawFilePath = `docs/${doc.slug}.md`;
 if (doc.category === 'decision') {
   rawFilePath = `docs/decisiones/${doc.slug.replace('decisiones-', '')}.md`;
-} else if (doc.category === 'blog') {
-  rawFilePath = `docs/blog/${doc.slug.replace('blog-', '')}.md`;
 }
 ---
 

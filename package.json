@@ -1,7 +1,7 @@
 {
-  "name": "catalogo-datamesh",
+  "name": "catalogo-lapaz",
   "version": "1.0.0",
-  "description": "Portal y catálogo federado DataMesh Bolivia (datos-bolivia)",
+  "description": "Portal y catálogo de Datos Abiertos de la Ciudad de La Paz (datoslapaz)",
   "type": "module",
   "main": "electron/main.cjs",
   "scripts": {
@@ -19,6 +19,7 @@
     "@observablehq/plot": "^0.6.17",
     "@types/leaflet": "^1.9.22",
     "astro": "^5.4.2",
+    "hyparquet": "^1.32.0",
     "js-yaml": "^4.1.0",
     "leaflet": "^1.9.4"
   },

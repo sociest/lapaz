@@ -1,0 +1,35 @@
+name: instalacion-de-nuevas-luminarias-segun-macrodistrito
+title: INSTALACIÓN DE NUEVAS LUMINARIAS SEGÚN MACRODISTRITO, 2010-2024 (p)
+description: En 2024 se instalaron en el Municipio de La Paz 296 nuevas luminarias,
+  el Macrodistrito Sur concentra la mayor cantidad (95) seguido por Periférica (76)
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2010-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: INSTALACIÓN DE NUEVAS LUMINARIAS SEGÚN MACRODISTRITO, 2010-2024 (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: MACRODISTRTIO
+      type: string
+      description: 'Variable: MACRODISTRTIO'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: NÚMERO DE NUEVAS LUMINARIAS INSTALADAS
+      type: integer
+      description: 'Variable: NÚMERO DE NUEVAS LUMINARIAS INSTALADAS'

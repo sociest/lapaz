@@ -1,0 +1,38 @@
+name: tasa-de-dependencia-demografica-segun-macrodistrito-y-distrito
+title: TASA DE DEPENDENCIA DEMOGRÁFICA (1) SEGUN MACRODISTRITO Y DISTRITO, 1992,2001,2023
+description: La tasa de dependencia demográfica del municipio de La Paz según macrodistrito
+  y distrito para el año 2023 alcanzó 46,1%
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '1992-01-01T00:00:00Z'
+  end: '2001-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: TASA DE DEPENDENCIA DEMOGRÁFICA (1) SEGUN MACRODISTRITO Y DISTRITO, 1992,2001,2023
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: MACRODISTRITO
+      type: string
+      description: 'Variable: MACRODISTRITO'
+    - name: DISTRITO
+      type: string
+      description: 'Variable: DISTRITO'
+    - name: AÑO
+      type: string
+      description: 'Variable: AÑO'
+    - name: POBLACIÓN
+      type: integer
+      description: 'Variable: POBLACIÓN'

@@ -1,0 +1,40 @@
+name: servicios-basicos-disponibles-en-las-estaciones-integrales-y-modulos-policiales-por-t
+title: SERVICIOS BÁSICOS DISPONIBLES EN LAS ESTACIONES INTEGRALES Y MÓDULOS POLICIALES
+  POR TIPO DE SERVICIO SEGÚN MACRODISTRITO, 2010-2024 (p)
+description: En 2023 103 módulos policiales contaban con agua y energía eléctrica,
+  13 con internet, 11 con teléfono y 5 con gas en el municipio de La Paz.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2010-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: SERVICIOS BÁSICOS DISPONIBLES EN LAS ESTACIONES INTEGRALES Y MÓDULOS POLICIALES
+    POR TIPO DE SERVICIO SEGÚN MACRODISTRITO, 2010-2024 (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: MACRODISTRITOS
+      type: string
+      description: 'Variable: MACRODISTRITOS'
+    - name: SERVICIOS BÁSICOS DISPONIBLES
+      type: string
+      description: 'Variable: SERVICIOS BÁSICOS DISPONIBLES'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: NÚMERO DE CONECCIONES
+      type: integer
+      description: 'Variable: NÚMERO DE CONECCIONES'

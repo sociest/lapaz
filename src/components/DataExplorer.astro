@@ -996,7 +996,14 @@ const schemaColsJson = JSON.stringify(schemaColNames);
     }
 
     // 2. CSV por defecto
-    return parseCsv(rawText);
+    const firstLine = text.split(/\r?\n/)[0] || '';
+    const semiCount = (firstLine.match(/;/g) || []).length;
+    const commaCount = (firstLine.match(/,/g) || []).length;
+    const tabCount = (firstLine.match(/\t/g) || []).length;
+    let delim = ',';
+    if (tabCount > commaCount && tabCount > semiCount) delim = '\t';
+    else if (semiCount > commaCount) delim = ';';
+    return parseCsv(rawText, delim);
   }
 
   function setupExplorers() {
@@ -1534,7 +1541,13 @@ const schemaColsJson = JSON.stringify(schemaColNames);
             }
           }
 
-          const isZipOrArchive = Boolean(containerUrl) || format === 'zip' || (Boolean(resolvedTarget) && !resolvedTarget.startsWith('http://') && !resolvedTarget.startsWith('https://')) || (Boolean(remoteUrl) && remoteUrl.toLowerCase().endsWith('.zip'));
+          const isFetchableUrl = Boolean(resolvedTarget) && (
+            resolvedTarget.startsWith('http://') || 
+            resolvedTarget.startsWith('https://') || 
+            resolvedTarget.startsWith('/') ||
+            resolvedTarget.startsWith('./')
+          );
+          const isZipOrArchive = Boolean(containerUrl) || format === 'zip' || (Boolean(resolvedTarget) && !isFetchableUrl) || (Boolean(remoteUrl) && remoteUrl.toLowerCase().endsWith('.zip'));
 
           // 2. Si no se descargó vía MCP, usar fetch en cliente (directo o proxy)
           if (!parsed) {
@@ -1552,9 +1565,9 @@ const schemaColsJson = JSON.stringify(schemaColNames);
               const text = await resp.text();
               parsed = parseTabularData(text, format, schemaCols);
             } else {
-              // Intentar fetch directo con URL normalizada sólo si es HTTP(S)
+              // Intentar fetch directo con URL normalizada sólo si es HTTP(S) o ruta relativa
               try {
-                if (resolvedTarget && (resolvedTarget.startsWith('http://') || resolvedTarget.startsWith('https://'))) {
+                if (isFetchableUrl) {
                   const resp = await fetch(resolvedTarget);
                   if (resp.ok) {
                     const text = await resp.text();
@@ -1576,7 +1589,7 @@ const schemaColsJson = JSON.stringify(schemaColNames);
                   return;
                 }
               } catch (queryErr: any) {
-                // Si falla por CORS o red, reintentar con fetchWithCorsProxy
+                // Si falla por CORS o red en URL remota, reintentar con fetchWithCorsProxy
                 if (resolvedTarget && (resolvedTarget.startsWith('http://') || resolvedTarget.startsWith('https://'))) {
                   updateStatus('Reintentando descarga mediante proxy CORS...');
                   const resp = await fetchWithCorsProxy(resolvedTarget);

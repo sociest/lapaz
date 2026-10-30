@@ -1,0 +1,39 @@
+name: poblacion-segun-macrodistrito-y-distrito
+title: POBLACION SEGUN MACRODISTRITO Y DISTRITO, 1992, 2001,2025
+description: En 2025, se proyecta que la población en el municipio de La Paz supere
+  el millón de habitantes; Max Paredes es el macrodistrito con mayor población (206.865)
+  seguido por Periférica (199.467).
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '1992-01-01T00:00:00Z'
+  end: '2001-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: POBLACION SEGUN MACRODISTRITO Y DISTRITO, 1992, 2001,2025
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: MACRODISTRITO
+      type: string
+      description: 'Variable: MACRODISTRITO'
+    - name: DISTRITO
+      type: string
+      description: 'Variable: DISTRITO'
+    - name: AÑO
+      type: string
+      description: 'Variable: AÑO'
+    - name: POBLACIÓN
+      type: integer
+      description: 'Variable: POBLACIÓN'

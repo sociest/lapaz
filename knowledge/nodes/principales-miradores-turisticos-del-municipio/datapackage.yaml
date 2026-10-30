@@ -1,0 +1,34 @@
+name: principales-miradores-turisticos-del-municipio
+title: PRINCIPALES MIRADORES TURÍSTICOS DEL MUNICIPIO, 2024 (p)
+description: Los miradores más importantes del Municipio de La Paz y sus direcciones.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2024-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: PRINCIPALES MIRADORES TURÍSTICOS DEL MUNICIPIO, 2024 (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: MIRADORES
+      type: string
+      description: 'Variable: MIRADORES'
+    - name: MACRODISTRITO
+      type: string
+      description: 'Variable: MACRODISTRITO'
+    - name: UBICACIÓN
+      type: string
+      description: 'Variable: UBICACIÓN'

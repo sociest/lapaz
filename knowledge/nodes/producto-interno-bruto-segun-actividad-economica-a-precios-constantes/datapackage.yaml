@@ -1,0 +1,45 @@
+name: producto-interno-bruto-segun-actividad-economica-a-precios-constantes
+title: PRODUCTO INTERNO BRUTO, SEGUN ACTIVIDAD ECONOMICA A PRECIOS CONSTANTES, 2010
+  - 2023 (p)
+description: En 2023, el Producto Interno Bruto a precios constantes del departamento
+  de la Paz alcanzó 12.5 mil millones de bolivianos.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2010-01-01T00:00:00Z'
+  end: '2023-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: PRODUCTO INTERNO BRUTO, SEGUN ACTIVIDAD ECONOMICA A PRECIOS CONSTANTES, 2010
+    - 2023 (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: PRODUCTO INTERNO BRUTO (a precios básicos)
+      type: string
+      description: 'Variable: PRODUCTO INTERNO BRUTO (a precios básicos)'
+    - name: ACTIVIDAD ECONÓMICA
+      type: string
+      description: 'Variable: ACTIVIDAD ECONÓMICA'
+    - name: DESCRIPCIÓN
+      type: string
+      description: 'Variable: DESCRIPCIÓN'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: PIB SEGÚN ACTIVIDAD ECONÓMICA A PRECIOS CONSTANTES (En miles de bolivianos
+        de 1990)
+      type: integer
+      description: 'Variable: PIB SEGÚN ACTIVIDAD ECONÓMICA A PRECIOS CONSTANTES (En
+        miles de bolivianos de 1990)'

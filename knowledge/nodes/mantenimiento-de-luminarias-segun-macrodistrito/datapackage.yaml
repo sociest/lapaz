@@ -1,0 +1,39 @@
+name: mantenimiento-de-luminarias-segun-macrodistrito
+title: MANTENIMIENTO DE LUMINARIAS SEGUN MACRODISTRITO, 2010-2024 (p)
+description: En 2024 se ha realizado el mantenimiento correctivo de más de 13 mil
+  luminarias y el mantenimiento preventivo de 897 luminarias en el Municipio de La
+  Paz.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2010-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: MANTENIMIENTO DE LUMINARIAS SEGUN MACRODISTRITO, 2010-2024 (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: MACRODISTRITO
+      type: string
+      description: 'Variable: MACRODISTRITO'
+    - name: TIPO MANTENIMIENTO
+      type: string
+      description: 'Variable: TIPO MANTENIMIENTO'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: NÚMERO
+      type: integer
+      description: 'Variable: NÚMERO'

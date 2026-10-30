@@ -6,16 +6,16 @@ export const GET: APIRoute = async () => {
   const datasets = getAllDatasets();
 
   const lines: string[] = [
-    `# Compendio Exhaustivo DataMesh Bolivia (llms-full.txt)`,
+    `# Compendio Exhaustivo Datos La Paz (llms-full.txt)`,
     `Organización: ${config.organization.name}`,
     `URL: ${config.site.url}`,
     `Fecha: ${new Date().toISOString()}`,
     ``,
     `=== ESPECIFICACIÓN NORMATIVA Y GOBERNANZA ===`,
     `Estándar: Open Knowledge Format (OKF v0.2) / Frictionless DataPackage`,
-    `Política: Zero-Microdata y Soberanía Orientada al Dominio`,
+    `Política: Acceso abierto y normalizado a datos municipales`,
     ``,
-    `=== CATÁLOGO DE DATASETS (${datasets.length} NODOS FEDERADOS) ===`,
+    `=== CATÁLOGO DE DATASETS (${datasets.length} DATASETS DE LA PAZ) ===`,
     ``
   ];
 

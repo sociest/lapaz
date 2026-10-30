@@ -1,13 +1,12 @@
-# Catálogo Federado DataMesh Bolivia (`datos-bolivia`)
+# Catálogo de Datos Abiertos de La Paz (`datoslapaz`)
 
-[![Zenodo DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22986311.svg)](https://doi.org/10.5281/zenodo.22986311)
 [![OKF v0.2](https://img.shields.io/badge/standard-OKF%20%2F%20ODKF%20v0.2-blue)](docs/especificacion_knowledge.md)
 [![PWA Ready](https://img.shields.io/badge/PWA-offline--ready-green)](public/manifest.webmanifest)
 [![Astro](https://img.shields.io/badge/built%20with-Astro-ff5d01.svg)](https://astro.build)
 
-Bienvenido al Registro Central y Portal de Datos Abiertos de la red **DataMesh Bolivia**, administrado por la comunidad **`datos-bolivia`**. 
+Bienvenido al Registro Central y Portal de Datos Abiertos **Datos La Paz** (`datoslapaz`).
 
-Este repositorio actúa como el índice principal de descubrimiento para que investigadores, analistas ciudadanos y **Agentes de Inteligencia Artificial (LLMs)** puedan encontrar, verificar y consultar conjuntos de datos públicos soberanos bajo los estándares abiertos **Open Knowledge Format (OKF v0.2)** y **Frictionless DataPackage**.
+Este repositorio actúa como el catálogo e índice principal para que investigadores, analistas ciudadanos y **Agentes de Inteligencia Artificial (LLMs)** puedan encontrar, verificar y consultar las 179 series y conjuntos de datos estadísticos públicos del municipio de Nuestra Señora de La Paz bajo los estándares abiertos **Open Knowledge Format (OKF v0.2)** y **Frictionless DataPackage**, preservados en la colección de Kaggle [sociest/datos-abiertos-lapaz](https://www.kaggle.com/datasets/sociest/datos-abiertos-lapaz).
 
 ---
 
@@ -15,9 +14,9 @@ Este repositorio actúa como el índice principal de descubrimiento para que inv
 
 La aplicación web está estructurada bajo 5 rutas consolidadas y amigables:
 
-1. **`/` (Inicio)**: Resumen del ecosistema, métricas de nodos federados y acceso directo a los datasets destacados.
-2. **`/datasets`**: Explorador y buscador en tiempo real del catálogo, con fichas detalladas por dataset en `/datasets/[slug]` (esquemas tabulares, columnas, tipos de datos, conceptos SKOS y enlaces de descarga).
-3. **`/about`**: Fundamentos del proyecto, enlace formal al **Whitepaper oficial en Zenodo** ([DOI: 10.5281/zenodo.22986311](https://doi.org/10.5281/zenodo.22986311)), información sobre la **Primera Charla Comunitaria** y principios de la organización `datos-bolivia`.
+1. **`/` (Inicio)**: Resumen del catálogo, métricas de series estadísticas y acceso directo a los datasets destacados.
+2. **`/datasets`**: Explorador y buscador en tiempo real de los 179 datasets, con fichas detalladas por dataset en `/datasets/[slug]` (esquemas tabulares, columnas, tipos de datos y enlaces directos a Kaggle).
+3. **`/about`**: Fundamentos del catálogo, estándares abiertos y principios de la iniciativa `datoslapaz`.
 4. **`/docs`**: Especificación técnica normativa ODKF v0.2, guías de gobernanza y Registros de Decisión de Arquitectura (**ADRs**).
 5. **`/download`**: Centro de distribución multiplataforma: instalación directa como **Progressive Web App (PWA)** y descarga de la **Aplicación de Escritorio (Electron)** con capacidades extendidas de cómputo local.
 
@@ -80,6 +79,6 @@ Consulta la especificación completa en [`docs/especificacion_knowledge.md`](doc
 
 ---
 
-## Licencia y Cita
-- **Publicación:** *DataMesh Bolivia: Hacia un Ecosistema de Datos Colaborativo y Abierto*. Chirinos Lizondo, Andrés Humberto (2025). [DOI: 10.5281/zenodo.22986311](https://doi.org/10.5281/zenodo.22986311).
+## Licencia
 - **Código y Catálogo:** Publicado bajo estándares de Conocimiento Abierto para el bien público.
+- **Datos Municipales:** Colección [sociest/datos-abiertos-lapaz](https://www.kaggle.com/datasets/sociest/datos-abiertos-lapaz) licenciada bajo dominio público (CC0-1.0).

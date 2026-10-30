@@ -5,12 +5,11 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const localSdkSrc = path.resolve(__dirname, '../datamesh-sdk/bindings/typescript/src/index.ts');
-const isDev = process.env.NODE_ENV !== 'production' && !process.argv.includes('build');
-const shouldUseLocalSdk = isDev && fs.existsSync(localSdkSrc);
+const shouldUseLocalSdk = fs.existsSync(localSdkSrc);
 
 export default defineConfig({
   output: 'static',
-  site: 'https://datos-bolivia.github.io',
+  site: 'https://datoslapaz.github.io',
   base: '/',
   build: {
     format: 'file'
@@ -23,6 +22,7 @@ export default defineConfig({
     },
     optimizeDeps: {
       exclude: ['@datosbolivia/datamesh-client'],
+      include: ['hyparquet']
     },
   },
 });

@@ -1,0 +1,38 @@
+name: seguimiento-al-estado-nutricional-de-ninos-ninas-y-adolescentes-que-actualmente-tiene
+title: SEGUIMIENTO AL ESTADO NUTRICIONAL DE NIÑOS, NIÑAS Y ADOLESCENTES QUE ACTUALMENTE
+  TIENEN SU CARNET DE SALUD, 2010-2024 (p)
+description: En 2024, el 62% de los niños, niñas y adolescente que actualmente cuentas
+  con carnet de salud presenta un estado nutricional normal, y el 23% tiene riesgo
+  de sobrepeso
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2010-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: SEGUIMIENTO AL ESTADO NUTRICIONAL DE NIÑOS, NIÑAS Y ADOLESCENTES QUE ACTUALMENTE
+    TIENEN SU CARNET DE SALUD, 2010-2024 (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: ESTADO NUTRICIONAL
+      type: string
+      description: 'Variable: ESTADO NUTRICIONAL'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: PORCENTAJE
+      type: integer
+      description: 'Variable: PORCENTAJE'

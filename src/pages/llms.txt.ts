@@ -9,14 +9,14 @@ export const GET: APIRoute = async () => {
     `# ${config.site.title}`,
     `> ${config.site.description}`,
     ``,
-    `Este archivo expone el catálogo federado de datos abiertos de Bolivia conforme al estándar llms.txt. Permite a modelos de lenguaje (LLM) y agentes de IA descubrir datos estructurados sin alucinaciones.`,
+    `Este archivo expone el catálogo de datos abiertos de la Ciudad de La Paz conforme al estándar llms.txt. Permite a modelos de lenguaje (LLM) y agentes de IA descubrir datos estructurados sin alucinaciones.`,
     ``,
     `## Información y Documentación del Proyecto`,
     `- [Especificación ODKF v0.2](/raw/docs/especificacion_knowledge.md): Estándar normativo para nodos de datos abiertos federados.`,
     `- [Guía de Fork y Despliegue](/raw/docs/GUIAS_FORK_Y_DESPLIEGUE.md): Instrucciones para replicar y desplegar instancias institucionales del portal.`,
     `- [Centro Documental y ADRs](/docs): Registros formales de decisiones de arquitectura.`,
     ``,
-    `## Catálogo de Datasets Federados (Open Knowledge Format v0.2)`,
+    `## Catálogo de Datasets de La Paz (Open Knowledge Format v0.2)`,
     `A continuación se listan los nodos de datos disponibles con sus enlaces a los documentos Markdown originales:`
   ];
 

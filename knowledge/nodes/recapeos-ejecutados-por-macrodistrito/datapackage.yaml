@@ -1,0 +1,36 @@
+name: recapeos-ejecutados-por-macrodistrito
+title: RECAPEOS EJECUTADOS POR MACRODISTRITO, 2012-2024 (p)
+description: Entre 2012 a 2024 se han realizado más de 624 mil metros cuadrados en
+  recapeos en el Municipio de La Paz, siendo 2023 el año con la mayor cantidad de
+  estas intervenciones alcanzando más de 144 mil metros cuadrados en recapeos.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2012-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: RECAPEOS EJECUTADOS POR MACRODISTRITO, 2012-2024 (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: MACRODISTRITO
+      type: string
+      description: 'Variable: MACRODISTRITO'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: METROS CUADRADOS DE RECAPEO EJECUTADOS
+      type: string
+      description: 'Variable: METROS CUADRADOS DE RECAPEO EJECUTADOS'

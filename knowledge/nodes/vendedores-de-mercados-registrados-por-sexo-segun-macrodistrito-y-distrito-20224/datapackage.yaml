@@ -1,0 +1,43 @@
+name: vendedores-de-mercados-registrados-por-sexo-segun-macrodistrito-y-distrito-20224
+title: VENDEDORES DE MERCADOS REGISTRADOS POR SEXO, SEGUN MACRODISTRITO Y DISTRITO,
+  2010-20224(p)
+description: En 2024, se registraron 5.868 vendedores de mercados, de los cuales 5.263
+  son mujeres u 605 son hombres.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2010-01-01T00:00:00Z'
+  end: '2022-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: VENDEDORES DE MERCADOS REGISTRADOS POR SEXO, SEGUN MACRODISTRITO Y DISTRITO,
+    2010-20224(p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: MACRODISTRITO
+      type: string
+      description: 'Variable: MACRODISTRITO'
+    - name: DISTRITO
+      type: string
+      description: 'Variable: DISTRITO'
+    - name: SEXO
+      type: string
+      description: 'Variable: SEXO'
+    - name: Año
+      type: year
+      description: 'Variable: Año'
+    - name: VENDEDORES DE MERCADOS
+      type: integer
+      description: 'Variable: VENDEDORES DE MERCADOS'

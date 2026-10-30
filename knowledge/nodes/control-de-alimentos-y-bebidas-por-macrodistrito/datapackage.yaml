@@ -1,0 +1,41 @@
+name: control-de-alimentos-y-bebidas-por-macrodistrito
+title: CONTROL DE ALIMENTOS Y BEBIDAS POR MACRODISTRITO, 2012-2024 (p)
+description: En 2024 se han recolectado 144 muestras físico químicas y 291 muestras
+  microbiológicas haciendo un total de 435 inspecciones en el Municipio de La Paz.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2012-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: CONTROL DE ALIMENTOS Y BEBIDAS POR MACRODISTRITO, 2012-2024 (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: MACRODISTRITO
+      type: string
+      description: 'Variable: MACRODISTRITO'
+    - name: MUESTRA
+      type: string
+      description: 'Variable: MUESTRA'
+    - name: CONTROL DE ALIMENTOS Y BEBIDAS
+      type: string
+      description: 'Variable: CONTROL DE ALIMENTOS Y BEBIDAS'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: NÚMERO
+      type: integer
+      description: 'Variable: NÚMERO'

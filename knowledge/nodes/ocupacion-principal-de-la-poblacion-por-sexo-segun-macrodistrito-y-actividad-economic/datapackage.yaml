@@ -1,0 +1,44 @@
+name: ocupacion-principal-de-la-poblacion-por-sexo-segun-macrodistrito-y-actividad-economic
+title: OCUPACION PRINCIPAL DE LA POBLACION POR SEXO, SEGUN MACRODISTRITO Y ACTIVIDAD
+  ECONOMICA, 1992,2001,2018, 2023(p)
+description: En 2023, la ocupación principal de la población fue en la actividad económica
+  referente a venta y reparaciones (25,5% del total), seguido por Industria manufacturera
+  (11,0%) y servicios inmobiliarios, empresariales y de alquiler (10,8%)
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '1992-01-01T00:00:00Z'
+  end: '2001-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: OCUPACION PRINCIPAL DE LA POBLACION POR SEXO, SEGUN MACRODISTRITO Y ACTIVIDAD
+    ECONOMICA, 1992,2001,2018, 2023(p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: MACRODISTRITO
+      type: string
+      description: 'Variable: MACRODISTRITO'
+    - name: ACTIVIDAD ECONÓMICA
+      type: string
+      description: 'Variable: ACTIVIDAD ECONÓMICA'
+    - name: SEXO
+      type: string
+      description: 'Variable: SEXO'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: OCUPACIÓN PRINCIPAL (En porcentaje)
+      type: integer
+      description: 'Variable: OCUPACIÓN PRINCIPAL (En porcentaje)'

@@ -262,11 +262,19 @@ export function getAllDatasets(): DatasetNode[] {
     const allResources: DataResource[] = [];
     if (datapackage?.resources && Array.isArray(datapackage.resources)) {
       datapackage.resources = normalizeManifestResources(datapackage.resources);
+      for (const res of datapackage.resources) {
+        if (res.path && !res.path.startsWith('http://') && !res.path.startsWith('https://') && !res.path.startsWith('/')) {
+          res.path = `/raw/nodes/${slug}/${res.path.replace(/^\.\//, '')}`;
+        }
+      }
       allResources.push(...datapackage.resources);
     }
     if (Array.isArray(frontmatter.resources)) {
       const normFm = normalizeManifestResources(frontmatter.resources);
       for (const res of normFm) {
+        if (res.path && !res.path.startsWith('http://') && !res.path.startsWith('https://') && !res.path.startsWith('/')) {
+          res.path = `/raw/nodes/${slug}/${res.path.replace(/^\.\//, '')}`;
+        }
         if (!allResources.some(r => r.name === res.name)) {
           allResources.push(res);
         }
@@ -682,36 +690,7 @@ export function getAllDocs(): DocItem[] {
     }
   }
 
-  const blogDir = path.join(docsDir, 'blog');
-  if (fs.existsSync(blogDir)) {
-    const bEntries = fs.readdirSync(blogDir);
-    for (const file of bEntries) {
-      if (!file.endsWith('.md')) continue;
-      const filePath = path.join(blogDir, file);
-      const raw = fs.readFileSync(filePath, 'utf-8');
-      const { frontmatter, body } = parseFrontmatter(raw);
-      const slug = `blog-${file.replace('.md', '')}`;
-      docs.push({
-        slug,
-        title: frontmatter.title || file.replace('.md', ''),
-        type: frontmatter.type || 'blog',
-        description: frontmatter.description || extractFirstParagraph(body),
-        timestamp: frontmatter.timestamp || frontmatter.date,
-        status: frontmatter.status || 'Publicado',
-        rawMarkdown: raw,
-        bodyMarkdown: body,
-        category: 'blog'
-      });
-    }
-  }
-
   return docs;
-}
-
-export function getBlogPosts(): DocItem[] {
-  return getAllDocs()
-    .filter(d => d.category === 'blog')
-    .sort((a, b) => ((b.timestamp || '') > (a.timestamp || '') ? 1 : -1));
 }
 
 export function getEditorialPage(pageName: string): { title: string; description?: string; body: string } {

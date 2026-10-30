@@ -1,0 +1,39 @@
+name: tramites-de-certificacion-catastral-de-propiedad-horizontal-segun-distrito-catastral
+title: TRAMITES DE CERTIFICACION CATASTRAL DE PROPIEDAD HORIZONTAL SEGUN DISTRITO
+  CATASTRAL, 2010-2022 (p)
+description: Entre 2010 a 2024 se ha realizado la certificación de más de 84 mil tramites
+  catastrales, siendo 2010 el año con la mayor cantidad de certificaciones alcanzando
+  más de 17 mil tramites catastrales.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2010-01-01T00:00:00Z'
+  end: '2022-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: TRAMITES DE CERTIFICACION CATASTRAL DE PROPIEDAD HORIZONTAL SEGUN DISTRITO
+    CATASTRAL, 2010-2022 (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: DISTRITO CATASTRAL
+      type: string
+      description: 'Variable: DISTRITO CATASTRAL'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: NÚMERO DE TRAMITES DE CERTIFICACIÓN CATASTRAL DE PROPIEDAD HORIZONTAL
+      type: integer
+      description: 'Variable: NÚMERO DE TRAMITES DE CERTIFICACIÓN CATASTRAL DE PROPIEDAD
+        HORIZONTAL'

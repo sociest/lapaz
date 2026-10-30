@@ -1,0 +1,40 @@
+name: condicion-de-las-infraestructuras-policiales-segun-macrodistrito
+title: CONDICIÓN DE LAS INFRAESTRUCTURAS POLICIALES SEGÚN MACRODISTRITO, 2010-2024
+  (p)
+description: En 2024 de las 104 Infraestructuras Policiales en el Municipio de La
+  Paz, 94 están en estado regular, 9 en estado bueno y 1 en mal estado.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2010-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: CONDICIÓN DE LAS INFRAESTRUCTURAS POLICIALES SEGÚN MACRODISTRITO, 2010-2024
+    (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: MACRODISTRITO
+      type: string
+      description: 'Variable: MACRODISTRITO'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: CONDICIÓN DE LAS INFRAESTRUCTURAS POLICIALES
+      type: string
+      description: 'Variable: CONDICIÓN DE LAS INFRAESTRUCTURAS POLICIALES'
+    - name: Número
+      type: integer
+      description: 'Variable: Número'

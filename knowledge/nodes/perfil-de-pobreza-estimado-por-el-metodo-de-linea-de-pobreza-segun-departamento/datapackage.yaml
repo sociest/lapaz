@@ -1,0 +1,59 @@
+name: perfil-de-pobreza-estimado-por-el-metodo-de-linea-de-pobreza-segun-departamento
+title: PERFIL DE POBREZA ESTIMADO POR EL MÉTODO DE LÍNEA DE POBREZA SEGÚN DEPARTAMENTO,
+  2023
+description: Para 2023, el perfil de pobreza estimado por el método de pobreza por
+  departamento y área geográfica muestra que el 36,4% de la población es en pobreza
+  moderada y 11,9% en pobreza extrema
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2023-01-01T00:00:00Z'
+  end: '2023-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: PERFIL DE POBREZA ESTIMADO POR EL MÉTODO DE LÍNEA DE POBREZA SEGÚN DEPARTAMENTO,
+    2023
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: ÁREA
+      type: string
+      description: 'Variable: ÁREA'
+    - name: DEPARTAMENTO
+      type: string
+      description: 'Variable: DEPARTAMENTO'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: Nº DE PERSONAS (en miles)
+      type: integer
+      description: 'Variable: Nº DE PERSONAS (en miles)'
+    - name: '% DE PERSONAS'
+      type: integer
+      description: 'Variable: % DE PERSONAS'
+    - name: INGRESO PERCÁPITA DEL HOGAR (Bs.)
+      type: integer
+      description: 'Variable: INGRESO PERCÁPITA DEL HOGAR (Bs.)'
+    - name: INCIDENCIA DE POBREZA MODERADA
+      type: integer
+      description: 'Variable: INCIDENCIA DE POBREZA MODERADA'
+    - name: INCIDENCIA DE POBREZA EXTREMA
+      type: integer
+      description: 'Variable: INCIDENCIA DE POBREZA EXTREMA'
+    - name: BRECHA DE POBREZA
+      type: integer
+      description: 'Variable: BRECHA DE POBREZA'
+    - name: SEVERIDAD DE POBREZA
+      type: integer
+      description: 'Variable: SEVERIDAD DE POBREZA'

@@ -1,0 +1,41 @@
+name: intervenciones-bacheo-y-recapeo-realizados-por-la-unidad-de-mantenimiento-vial-segun
+title: INTERVENCIONES BACHEO Y RECAPEO REALIZADOS POR LA UNIDAD DE MANTENIMIENTO VIAL
+  SEGÚN MACRODISTRITO, 2014-2024 (p)
+description: En 2024 se realizó mas de 53 mil metros cuadrados en bacheos y más de
+  62 mil metros cuadrados en recapeos. siendo el macrodistrito San Antonio el lugar
+  donde se realizo la mayor cantidad intervenciones en dicha gestión.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2014-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: INTERVENCIONES BACHEO Y RECAPEO REALIZADOS POR LA UNIDAD DE MANTENIMIENTO
+    VIAL SEGÚN MACRODISTRITO, 2014-2024 (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: MACRODISTRITO
+      type: string
+      description: 'Variable: MACRODISTRITO'
+    - name: INTERVENCIONES
+      type: string
+      description: 'Variable: INTERVENCIONES'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: METROS CUADRADOS
+      type: integer
+      description: 'Variable: METROS CUADRADOS'

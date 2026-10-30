@@ -1,0 +1,34 @@
+name: inversion-programada-y-ejecutada-en-museos-municipales
+title: INVERSIÓN PROGRAMADA Y EJECUTADA EN MUSEOS MUNICIPALES, 2010-2024 (p)
+description: En 2024, la inversión programada en museos municipales asciende a Bs832.223
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2010-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: INVERSIÓN PROGRAMADA Y EJECUTADA EN MUSEOS MUNICIPALES, 2010-2024 (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: INVERSIÓN
+      type: string
+      description: 'Variable: INVERSIÓN'
+    - name: INVERSIÓN EN MUSEOS MUNICIPALES
+      type: integer
+      description: 'Variable: INVERSIÓN EN MUSEOS MUNICIPALES'

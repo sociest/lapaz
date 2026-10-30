@@ -1,0 +1,35 @@
+name: inmuebles-municipales-registrados-segun-distrito-catastral
+title: INMUEBLES MUNICIPALES REGISTRADOS SEGUN DISTRITO CATASTRAL, 2010-2024 (p)
+description: Entre 2010 a 2024 se han registrado 5.019 inmuebles municipales, siendo
+  2016 el año con la mayor cantidad de registros alcanzando 749 registros de inmuebles.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2010-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: INMUEBLES MUNICIPALES REGISTRADOS SEGUN DISTRITO CATASTRAL, 2010-2024 (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: DISTRITO CATASTRAL
+      type: string
+      description: 'Variable: DISTRITO CATASTRAL'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: INMUEBLES MUNICIPALES REGISTRADOS
+      type: integer
+      description: 'Variable: INMUEBLES MUNICIPALES REGISTRADOS'

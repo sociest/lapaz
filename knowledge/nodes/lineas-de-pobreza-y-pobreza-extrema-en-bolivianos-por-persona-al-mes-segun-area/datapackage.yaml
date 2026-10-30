@@ -1,0 +1,40 @@
+name: lineas-de-pobreza-y-pobreza-extrema-en-bolivianos-por-persona-al-mes-segun-area
+title: LINEAS DE POBREZA Y POBREZA EXTREMA EN BOLIVIANOS POR PERSONA AL MES, SEGÚN
+  ÁREA, 2010-2023
+description: En 2023, en el Municipio de La Paz se tenia una línea de pobreza de Bs1.092
+  por persona/mes y Bs532,9 por persona/mes en línea e pobreza extrema
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2010-01-01T00:00:00Z'
+  end: '2023-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: LINEAS DE POBREZA Y POBREZA EXTREMA EN BOLIVIANOS POR PERSONA AL MES, SEGÚN
+    ÁREA, 2010-2023
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: TIPO
+      type: string
+      description: 'Variable: TIPO'
+    - name: NIVEL
+      type: string
+      description: 'Variable: NIVEL'
+    - name: POBREZA
+      type: integer
+      description: 'Variable: POBREZA'

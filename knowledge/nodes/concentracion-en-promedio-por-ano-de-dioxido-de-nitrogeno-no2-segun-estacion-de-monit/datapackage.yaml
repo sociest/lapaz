@@ -1,0 +1,44 @@
+name: concentracion-en-promedio-por-ano-de-dioxido-de-nitrogeno-no2-segun-estacion-de-monit
+title: CONCENTRACIÓN, EN PROMEDIO POR AÑO, DE DIÓXIDO DE NITRÓGENO (NO2) SEGÚN ESTACIÓN
+  DE MONITOREO, 2010-2024 (p)
+description: En 2024, la mayor concentración promedio de dióxido de nitrógeno (NO2)
+  se encuentra en la estación de monitoreo Terminal con 61,1 µgNO2/m3, seguido por
+  la estación de monitoreo san Francisco (44,7 µgNO2/m3).
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2010-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: CONCENTRACIÓN, EN PROMEDIO POR AÑO, DE DIÓXIDO DE NITRÓGENO (NO2) SEGÚN ESTACIÓN
+    DE MONITOREO, 2010-2024 (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: ESTACIÓN DE MONITOREO
+      type: string
+      description: 'Variable: ESTACIÓN DE MONITOREO'
+    - name: CÓDIGO DE ESTACIÓN
+      type: string
+      description: 'Variable: CÓDIGO DE ESTACIÓN'
+    - name: DISTRITO
+      type: integer
+      description: 'Variable: DISTRITO'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: µgNO2/m3
+      type: string
+      description: 'Variable: µgNO2/m3'

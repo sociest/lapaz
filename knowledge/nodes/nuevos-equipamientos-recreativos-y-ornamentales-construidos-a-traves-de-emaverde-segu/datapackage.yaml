@@ -1,0 +1,38 @@
+name: nuevos-equipamientos-recreativos-y-ornamentales-construidos-a-traves-de-emaverde-segu
+title: NUEVOS EQUIPAMIENTOS RECREATIVOS Y ORNAMENTALES CONSTRUIDOS A TRAVÉS DE EMAVERDE
+  SEGÚN TIPOLOGÍA, 2010-2024 (p)
+description: La mayor cantidad de equipamientos recreativos y ornamentales construidos
+  por EMAVERDE se realizó en 2010 con 75 equipos y 2011 con 69 equipos. En la gestión
+  2024, se registraon 17 nuevos equipamientos recreativos y ornamentales.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2010-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: NUEVOS EQUIPAMIENTOS RECREATIVOS Y ORNAMENTALES CONSTRUIDOS A TRAVÉS DE EMAVERDE
+    SEGÚN TIPOLOGÍA, 2010-2024 (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: TIPOLOGÍA
+      type: string
+      description: 'Variable: TIPOLOGÍA'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: EN NÚMERO
+      type: integer
+      description: 'Variable: EN NÚMERO'

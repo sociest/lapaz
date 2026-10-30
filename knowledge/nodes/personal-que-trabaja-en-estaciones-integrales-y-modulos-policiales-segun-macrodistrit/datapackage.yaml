@@ -1,0 +1,44 @@
+name: personal-que-trabaja-en-estaciones-integrales-y-modulos-policiales-segun-macrodistrit
+title: PERSONAL QUE TRABAJA EN ESTACIONES INTEGRALES Y MÓDULOS POLICIALES SEGÚN MACRODISTRITO
+  Y DISTRITO, 2010-2023
+description: En 2023 habían 1.122 policías en las Estaciones Integrales y Módulos
+  Policiales en el Municipio de La Paz, de los cuales 1.060 eran hombres y 122 mujeres.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2010-01-01T00:00:00Z'
+  end: '2023-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: PERSONAL QUE TRABAJA EN ESTACIONES INTEGRALES Y MÓDULOS POLICIALES SEGÚN MACRODISTRITO
+    Y DISTRITO, 2010-2023
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: MACRODISTRITO
+      type: string
+      description: 'Variable: MACRODISTRITO'
+    - name: DISTRITO
+      type: string
+      description: 'Variable: DISTRITO'
+    - name: SEXO
+      type: string
+      description: 'Variable: SEXO'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: PERSONAL QUE TRABAJA EN ESTACIONES INTEGRALES Y MÓDULOS POLICIALES
+      type: integer
+      description: 'Variable: PERSONAL QUE TRABAJA EN ESTACIONES INTEGRALES Y MÓDULOS
+        POLICIALES'

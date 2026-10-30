@@ -4,29 +4,30 @@
    ========================================================================== */
 
 :root {
-  /* Paleta Sociedad Civil & Open Knowledge (Teal Cívico, Tinta Pizarra y Papel Cálido) */
-  --color-primary: #0f766e;
-  --color-primary-hover: #115e59;
-  --color-primary-subtle: #f0fdfa;
-  --color-secondary: #1e293b;
-  --color-secondary-subtle: #334155;
-  --color-accent: #c2410c;
-  --color-accent-subtle: #fff7ed;
+  /* Paleta Institucional La Paz (Rojo Punzó, Verde Esmeralda y Pizarra) */
+  --color-primary: #9e1b2f;
+  --color-primary-hover: #7f1222;
+  --color-primary-subtle: #fdf2f2;
+  --color-secondary: #0a5c36;
+  --color-secondary-hover: #074528;
+  --color-secondary-subtle: #f0fdf4;
+  --color-accent: #0a5c36;
+  --color-accent-subtle: #f0fdf4;
 
-  /* Superficies y Neutros Cálidos (Inspirados en publicaciones editoriales y dossiers abiertos) */
-  --color-bg: #fcfbf9;
+  /* Superficies y Neutros Cálidos Institucionales */
+  --color-bg: #f8fafc;
   --color-surface: #ffffff;
-  --color-surface-hover: #f5f3ef;
-  --color-border: #e7e5e4;
-  --color-border-subtle: #f5f5f4;
+  --color-surface-hover: #f1f5f9;
+  --color-border: #e2e8f0;
+  --color-border-subtle: #f1f5f9;
   
   /* Textos de Alta Legibilidad */
-  --color-text: #1c1917;
-  --color-text-muted: #57534e;
-  --color-text-light: #8c857b;
+  --color-text: #0f172a;
+  --color-text-muted: #475569;
+  --color-text-light: #64748b;
   
   /* Estados */
-  --color-success: #15803d;
+  --color-success: #0a5c36;
   --color-success-bg: #f0fdf4;
   --color-info: #0284c7;
   --color-info-bg: #f0f9ff;
@@ -52,33 +53,34 @@
 }
 
 [data-theme="dark"] {
-  --color-primary: #2dd4bf;
-  --color-primary-hover: #5eead4;
-  --color-primary-subtle: #132e2d;
-  --color-secondary: #0f172a;
-  --color-secondary-subtle: #1e293b;
-  --color-accent: #fb923c;
-  --color-accent-subtle: #431407;
+  --color-primary: #f43f5e;
+  --color-primary-hover: #fb7185;
+  --color-primary-subtle: #2e0911;
+  --color-secondary: #22c55e;
+  --color-secondary-hover: #4ade80;
+  --color-secondary-subtle: #052e16;
+  --color-accent: #22c55e;
+  --color-accent-subtle: #052e16;
 
-  --color-bg: #111618;
-  --color-surface: #1a2023;
-  --color-surface-hover: #242b30;
-  --color-border: #2a3338;
-  --color-border-subtle: #1e2529;
+  --color-bg: #090d13;
+  --color-surface: #131b26;
+  --color-surface-hover: #1b2636;
+  --color-border: #243245;
+  --color-border-subtle: #172230;
   
-  --color-text: #f5f5f4;
-  --color-text-muted: #a8a29e;
-  --color-text-light: #78716c;
+  --color-text: #f8fafc;
+  --color-text-muted: #94a3b8;
+  --color-text-light: #64748b;
 
   --color-success: #22c55e;
   --color-success-bg: #052e16;
   --color-info: #38bdf8;
   --color-info-bg: #082f49;
-  --color-warning: #f97316;
-  --color-warning-bg: #431407;
+  --color-warning: #f59e0b;
+  --color-warning-bg: #451a03;
 
-  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.25);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.35);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.35);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.45);
 }
 
 /* ==========================================================================
@@ -290,6 +292,8 @@ button.nav-toggle,
 }
 
 .site-header {
+  border-top: 3.5px solid transparent;
+  border-image: linear-gradient(90deg, #9e1b2f 0%, #9e1b2f 50%, #0a5c36 50%, #0a5c36 100%) 1;
   border-bottom: 1px solid var(--color-border);
   background-color: var(--color-surface);
   position: sticky;
@@ -459,7 +463,7 @@ button.nav-toggle,
 
 .card:hover {
   border-color: var(--color-primary);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
 }
 
 /* Badges */
@@ -759,7 +763,13 @@ tr:last-child td {
   display: flex;
   flex-direction: column;
   height: 100%;
+  border-top: 3px solid transparent;
   transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.dataset-card:hover {
+  border-top-color: var(--color-primary);
+  border-color: var(--color-primary);
 }
 
 .dataset-card-main {

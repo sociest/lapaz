@@ -1,13 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import DatasetCard from '../components/DatasetCard.astro';
-import { getAllDatasets, getBlogPosts, getEditorialPage } from '../lib/catalog';
+import { getAllDatasets, getEditorialPage } from '../lib/catalog';
 import { config } from '../../portal.config';
 
 const homeContent = getEditorialPage('home');
 const allDatasets = getAllDatasets();
 const featuredDatasets = allDatasets.slice(0, 6);
-const blogPosts = getBlogPosts();
 
 // Estadísticas del catálogo
 const totalDatasets = allDatasets.length;
@@ -131,10 +130,6 @@ const heroTopics = Object.keys(categoryCounts)
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
           <span data-i18n="hero.about">Acerca del Proyecto</span>
         </a>
-        <a href="/download" class="btn btn-secondary">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span data-i18n="hero.install">Descargar</span>
-        </a>
       </div>
     </div>
   </section>
@@ -176,46 +171,4 @@ const heroTopics = Object.keys(categoryCounts)
       ))}
     </div>
   </section>
-
-  <!-- Novedades y Notas Técnicas del Blog en Docs -->
-  {blogPosts.length > 0 && (
-    <section style="margin-bottom: 3rem; border-top: 1px solid var(--color-border); padding-top: 2.5rem;">
-      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.5rem;">
-        <div>
-          <h2 style="margin: 0; font-size: 1.5rem;" data-i18n="home.blog_title">Novedades y Notas Técnicas</h2>
-          <p style="color: var(--color-text-muted); font-size: 0.875rem; margin: 0;" data-i18n="home.blog_sub">
-            Actualizaciones sobre el catálogo y los estándares federados.
-          </p>
-        </div>
-        <a href="/docs" style="font-size: 0.875rem; font-weight: 500; display: inline-flex; align-items: center; gap: 0.35rem;">
-          <span data-i18n="nav.docs">Ver docs</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </a>
-      </div>
-
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem;">
-        {blogPosts.slice(0, 2).map((post) => (
-          <article class="card" style="padding: 1.25rem;">
-            <div style="margin-bottom: 0.35rem;">
-              <span style="font-size: 0.725rem; color: var(--color-primary); font-family: var(--font-mono); font-weight: 600; text-transform: uppercase;">
-                {post.timestamp ? post.timestamp.split('T')[0] : 'Blog'}
-              </span>
-            </div>
-            <h3 style="font-size: 1.15rem; margin-bottom: 0.4rem;">
-              <a href={`/docs/${post.slug}`} style="text-decoration: none; color: inherit;">
-                {post.title}
-              </a>
-            </h3>
-            <p style="font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: 1rem; line-height: 1.45;">
-              {post.description}
-            </p>
-            <a href={`/docs/${post.slug}`} class="btn btn-secondary btn-sm">
-              <span data-i18n="home.read_more">Leer artículo</span>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </a>
-          </article>
-        ))}
-      </div>
-    </section>
-  )}
 </BaseLayout>

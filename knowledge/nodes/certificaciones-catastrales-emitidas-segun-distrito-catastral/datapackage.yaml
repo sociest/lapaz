@@ -1,0 +1,38 @@
+name: certificaciones-catastrales-emitidas-segun-distrito-catastral
+title: CERTIFICACIONES CATASTRALES EMITIDAS (1) SEGUN DISTRITO CATASTRAL, 2010-2024
+  (p)
+description: Entre 2010 a 2024 se han emitido mas de 206 mil certificados catastrales,
+  donde la mayor cantidad se realizo en el año 2015 con más de 23 mil certificados
+  catastrales.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2010-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: CERTIFICACIONES CATASTRALES EMITIDAS (1) SEGUN DISTRITO CATASTRAL, 2010-2024
+    (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: DISTRITO CATASTRAL
+      type: string
+      description: 'Variable: DISTRITO CATASTRAL'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: NÚMERO DE CERTIFICACIONES CATASTRALES EMITIDAS
+      type: integer
+      description: 'Variable: NÚMERO DE CERTIFICACIONES CATASTRALES EMITIDAS'

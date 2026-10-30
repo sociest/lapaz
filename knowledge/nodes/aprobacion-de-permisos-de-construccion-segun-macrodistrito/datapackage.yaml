@@ -1,0 +1,36 @@
+name: aprobacion-de-permisos-de-construccion-segun-macrodistrito
+title: APROBACION DE PERMISOS DE CONSTRUCCION SEGUN MACRODISTRITO, 2010-2024 (p)
+description: Entre 2010 a 2024 se han aprobado más de 8 mil permisos de construcción
+  en el Municipio de La Paz. donde el mayor número de estas se encuentra en el macrodistrito
+  Sur con 2.648 aprobaciones y el año de con mayor número de aprobaciones fue 2011.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2010-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: APROBACION DE PERMISOS DE CONSTRUCCION SEGUN MACRODISTRITO, 2010-2024 (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: MACRODISTRITO
+      type: string
+      description: 'Variable: MACRODISTRITO'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: NÚMERO DE APROBACIONES DE PERMISOS DE CONSTRUCCIÓN
+      type: integer
+      description: 'Variable: NÚMERO DE APROBACIONES DE PERMISOS DE CONSTRUCCIÓN'

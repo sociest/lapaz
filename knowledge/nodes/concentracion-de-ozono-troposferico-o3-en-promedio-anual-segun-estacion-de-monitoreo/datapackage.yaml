@@ -1,0 +1,44 @@
+name: concentracion-de-ozono-troposferico-o3-en-promedio-anual-segun-estacion-de-monitoreo
+title: CONCENTRACIÓN DE OZONO TROPOSFÉRICO (O3) EN PROMEDIO ANUAL SEGÚN ESTACIÓN DE
+  MONITOREO, 2010-2024 (p)
+description: En 2023 la mayor concentración de ozono troposférico en promedio fue
+  registrado en la estación de monitoreo "Plan Autopista" con 34 μgO3/m3, seguido
+  de San Antonio con 32 μgO3/m3.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2010-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: CONCENTRACIÓN DE OZONO TROPOSFÉRICO (O3) EN PROMEDIO ANUAL SEGÚN ESTACIÓN
+    DE MONITOREO, 2010-2024 (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: ESTACIÓN DE MONITOREO
+      type: string
+      description: 'Variable: ESTACIÓN DE MONITOREO'
+    - name: CÓDIGO DE ESTACIÓN
+      type: string
+      description: 'Variable: CÓDIGO DE ESTACIÓN'
+    - name: DISTRITO
+      type: integer
+      description: 'Variable: DISTRITO'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: µgNO2/m3
+      type: string
+      description: 'Variable: µgNO2/m3'

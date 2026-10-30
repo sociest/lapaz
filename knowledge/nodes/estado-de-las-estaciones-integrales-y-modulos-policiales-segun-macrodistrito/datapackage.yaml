@@ -1,0 +1,41 @@
+name: estado-de-las-estaciones-integrales-y-modulos-policiales-segun-macrodistrito
+title: ESTADO DE LAS ESTACIONES INTEGRALES Y MÓDULOS POLICIALES SEGÚN MACRODISTRITO,
+  2010-2024 (p)
+description: En 2024 de las 104 Estaciones Integrales y Módulos Policiales del Municipio
+  de La Paz, 53 se encuentran en funcionamiento y 50 se encuentran en construcción
+  o mantenimiento.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2010-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: ESTADO DE LAS ESTACIONES INTEGRALES Y MÓDULOS POLICIALES SEGÚN MACRODISTRITO,
+    2010-2024 (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: MACRODISTRITO
+      type: string
+      description: 'Variable: MACRODISTRITO'
+    - name: ESTADO DE LAS ESTACIONES INTEGRALES Y MÓDULOS POLICIALES
+      type: string
+      description: 'Variable: ESTADO DE LAS ESTACIONES INTEGRALES Y MÓDULOS POLICIALES'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: Número
+      type: integer
+      description: 'Variable: Número'

@@ -1,0 +1,36 @@
+name: luminarias-reacondicionadas-e-instaladas-segun-macrodistrito
+title: LUMINARIAS REACONDICIONADAS E INSTALADAS SEGUN MACRODISTRITO, 2010-2024 (p)
+description: en 2024, se reacondicionaron e instalaron 683 luminarias en el Macrodistrito
+  de La Paz, siendo el Macrodistrito Sur el que concentra la mayor cantidad (223),
+  seguido por Periférica (120)
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2010-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: LUMINARIAS REACONDICIONADAS E INSTALADAS SEGUN MACRODISTRITO, 2010-2024 (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: MACRODISTRITO
+      type: string
+      description: 'Variable: MACRODISTRITO'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: NÚMERO DE LUNIMARIAS REACONDICIONADAS E INSTALADAS
+      type: integer
+      description: 'Variable: NÚMERO DE LUNIMARIAS REACONDICIONADAS E INSTALADAS'

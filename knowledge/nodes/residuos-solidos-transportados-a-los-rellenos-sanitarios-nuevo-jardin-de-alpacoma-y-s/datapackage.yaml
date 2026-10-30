@@ -1,0 +1,37 @@
+name: residuos-solidos-transportados-a-los-rellenos-sanitarios-nuevo-jardin-de-alpacoma-y-s
+title: RESIDUOS SÓLIDOS TRANSPORTADOS A LOS RELLENOS SANITARIOS "NUEVO JARDÍN DE ALPACOMA"
+  y SAK´A CHURU, 2010-2024 (p)
+description: En 2024 se han transportado más de 230 mil toneladas de residuos sólidos
+  a los rellenos sanitarios "NUEVO JARDÍN DE ALPACOMA" y SAK´A CHURU.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: municipio
+temporal:
+  start: '2010-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: RESIDUOS SÓLIDOS TRANSPORTADOS A LOS RELLENOS SANITARIOS "NUEVO JARDÍN DE
+    ALPACOMA" y SAK´A CHURU, 2010-2024 (p)
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
+  encoding: utf-8
+  schema:
+    fields:
+    - name: id
+      type: integer
+      description: 'Variable: id'
+    - name: AÑO
+      type: year
+      description: 'Variable: AÑO'
+    - name: MES
+      type: string
+      description: 'Variable: MES'
+    - name: RESIDUOS SOLIDOS TRANSPORTADOS
+      type: integer
+      description: 'Variable: RESIDUOS SOLIDOS TRANSPORTADOS'
