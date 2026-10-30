@@ -60,6 +60,17 @@ const {
     <SettingsModal />
 
     <script is:inline>
+      // Limpieza de Service Workers obsoletos fuera del subpath /lapaz
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then((registrations) => {
+          for (const reg of registrations) {
+            if (!reg.scope.includes('/lapaz')) {
+              reg.unregister();
+            }
+          }
+        }).catch(() => {});
+      }
+
       // Portapapeles para bloques de código
       document.addEventListener('click', async (event) => {
         const target = event.target;
