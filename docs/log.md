@@ -10,3 +10,10 @@
 - Detección automática y saneamiento de delimitadores (coma y punto y coma) en `DataExplorer.astro`.
 - Simplificación de arquitectura y navegación: eliminación de módulo de blog (`docs/blog/`) y rutas/enlaces de descargas (`/download`).
 - Desactivación de banners de instalación PWA y enlaces desktop para una interfaz web limpia y minimalista.
+- Implementación de panel visual interactivo estilo Our World in Data (`OwidFeaturedChart.astro`) con 3 series emblemáticas (PM10 de aire, permisos de edificación y demografía por macrodistrito), alternancia gráfico/tabla y tooltips.
+- Incorporación de sparklines deterministas y alcance temporal en tarjetas del catálogo (`DatasetCard.astro`).
+- Fusión completa de Home y Catálogo en una sola vista unificada (`index.astro`): buscador interactivo reactivo, filtrado multiselección de dominios y alternancia entre cuadrícula y lista.
+- Generación y renderizado de mini gráficas SVG estilo Our World in Data (series temporales y barras de distribución) para cada uno de los 63 datasets en la vista de mosaico (`src/data/mosaic-charts.json`).
+- Eliminación de ruta redundante `/datasets` (`src/pages/datasets/index.astro`).
+- Modularización del listado interactivo en componente reutilizable `src/components/DatasetList.astro`.
+- Actualización de navegación principal y breadcrumbs dirigiendo al catálogo unificado (`/`).

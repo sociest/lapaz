@@ -1,0 +1,19 @@
+name: infraestructuras-educativas-municipales-2024
+title: INFRAESTRUCTURAS EDUCATIVAS Y MATRÍCULA ESCOLAR POR MACRODISTRITO, 2024
+description: Relevamiento censal de 427 centros y unidades educativas por macrodistrito, turno, tipo de infraestructura y matrícula inicial, primaria y secundaria.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: unidad-educativa
+temporal:
+  start: '2024-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: INFRAESTRUCTURAS EDUCATIVAS Y MATRÍCULA ESCOLAR, 2024
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv

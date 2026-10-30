@@ -62,8 +62,7 @@ export const config: PortalConfig = {
     enableLocalProcessing: false
   },
   nav: [
-    { label: "Inicio", key: "nav.home", path: "/" },
-    { label: "Datasets", key: "nav.datasets", path: "/datasets" },
+    { label: "Catálogo", key: "nav.home", path: "/" },
     { label: "Acerca de", key: "nav.about", path: "/about" },
     { label: "Docs", key: "nav.docs", path: "/docs" }
   ]

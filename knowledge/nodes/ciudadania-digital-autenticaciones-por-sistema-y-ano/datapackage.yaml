@@ -1,0 +1,19 @@
+name: ciudadania-digital-autenticaciones-por-sistema-y-ano
+title: "CIUDADANÍA DIGITAL: AUTENTICACIONES EXITOSAS POR SISTEMA DEL ESTADO Y AÑO"
+description: Registro de transacciones y autenticaciones exitosas en plataformas de gobierno electrónico y trámites digitales de la ciudadanía.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: nacional
+temporal:
+  start: '2020-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: AUTENTICACIONES POR SISTEMA Y AÑO
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv

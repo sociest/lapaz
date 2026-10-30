@@ -58,10 +58,9 @@ try {
   check('Linter OKF & ODKF v0.2', false, `Falla en linter normativo: ${e.message}`);
 }
 
-// 2. Verificación de 5 Rutas Canónicas
+// 2. Verificación de Rutas Canónicas
 const canonicalRoutes = [
   { path: '/', file: 'src/pages/index.astro' },
-  { path: '/datasets', file: 'src/pages/datasets/index.astro' },
   { path: '/datasets/[slug]', file: 'src/pages/datasets/[slug].astro' },
   { path: '/about', file: 'src/pages/about.astro' },
   { path: '/docs', file: 'src/pages/docs/index.astro' }

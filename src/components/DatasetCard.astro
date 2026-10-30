@@ -1,5 +1,6 @@
 ---
 import type { DatasetNode } from '../lib/catalog';
+import mosaicCharts from '../data/mosaic-charts.json';
 
 interface Props {
   dataset: DatasetNode;
@@ -7,15 +8,69 @@ interface Props {
 
 const { dataset } = Astro.props;
 const resCount = dataset.datapackage?.resources ? dataset.datapackage.resources.length : 1;
+
+// Extraer año o rango si existe en el título
+const yearMatch = dataset.title.match(/(\d{4}(?:\s*-\s*\d{4})?)/);
+const timeScope = yearMatch ? yearMatch[1] : 'Municipal';
+const format = dataset.datapackage?.resources?.[0]?.format || 'CSV';
+
+// Gráfico automático del mosaico
+const chartInfo = (mosaicCharts as Record<string, any>)[dataset.slug] || null;
+
+let svgWidth = 280;
+let svgHeight = 90;
+let pointsD = '';
+let areaD = '';
+let barElements: Array<{ x: number; y: number; width: number; height: number; label: string; value: number }> = [];
+
+if (chartInfo && chartInfo.items && chartInfo.items.length >= 2) {
+  const items: Array<{ label: string; value: number }> = chartInfo.items;
+  const values = items.map((i) => i.value);
+  const minVal = Math.min(...values, 0);
+  const maxVal = Math.max(...values, 1);
+  const valRange = maxVal - minVal || 1;
+
+  if (chartInfo.type === 'line') {
+    const padX = 14;
+    const padY = 12;
+    const chartW = svgWidth - padX * 2;
+    const chartH = svgHeight - padY * 2;
+
+    const coords = items.map((item, idx) => {
+      const x = padX + (idx / (items.length - 1)) * chartW;
+      const y = svgHeight - padY - ((item.value - minVal) / valRange) * chartH;
+      return { x, y, label: item.label, value: item.value };
+    });
+
+    pointsD = coords.map((c, i) => `${i === 0 ? 'M' : 'L'} ${c.x.toFixed(1)} ${c.y.toFixed(1)}`).join(' ');
+    areaD = `${pointsD} L ${coords[coords.length - 1].x.toFixed(1)} ${svgHeight - 4} L ${coords[0].x.toFixed(1)} ${svgHeight - 4} Z`;
+  } else {
+    // Bar chart
+    const padX = 12;
+    const padY = 12;
+    const availW = svgWidth - padX * 2;
+    const availH = svgHeight - padY * 2;
+    const count = items.length;
+    const slotW = availW / count;
+    const barW = Math.max(slotW * 0.55, 6);
+
+    barElements = items.map((item, idx) => {
+      const h = Math.max(((item.value - minVal) / valRange) * availH, 4);
+      const x = padX + idx * slotW + (slotW - barW) / 2;
+      const y = svgHeight - padY - h;
+      return { x, y, width: barW, height: h, label: item.label, value: item.value };
+    });
+  }
+}
 ---
 
-<article class="card dataset-card">
+<article class="card dataset-card dataset-mosaic-card" data-slug={dataset.slug} data-category={dataset.category}>
   <div class="dataset-card-main">
     <div class="dataset-card-meta">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--color-primary); flex-shrink: 0;"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-      <span class="dataset-card-category">
-        {dataset.category}
-      </span>
+      <span class="card-domain-indicator"></span>
+      <span class="dataset-card-category">{dataset.category}</span>
+      <span class="card-meta-dot">•</span>
+      <span class="card-timescope">{timeScope}</span>
     </div>
 
     <h3 class="dataset-card-title">
@@ -25,18 +80,65 @@ const resCount = dataset.datapackage?.resources ? dataset.datapackage.resources.
     </h3>
 
     <p class="dataset-card-desc">
-      {dataset.description.length > 130 ? `${dataset.description.substring(0, 130)}...` : dataset.description}
+      {dataset.description.length > 115 ? `${dataset.description.substring(0, 115)}...` : dataset.description}
     </p>
+
+    <!-- Mini Gráfica OWID en Mosaico -->
+    <div class="mosaic-chart-container" aria-label={`Gráfica de ${dataset.title}`}>
+      {chartInfo && pointsD && (
+        <div class="mosaic-chart-header">
+          <span class="mosaic-chart-type">Evolución temporal · {chartInfo.xKey}</span>
+          <span class="mosaic-chart-y">{chartInfo.yKey}</span>
+        </div>
+        <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} class="mosaic-svg" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id={`grad-${dataset.slug}`} x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="var(--color-primary)" stop-opacity="0.30"/>
+              <stop offset="100%" stop-color="var(--color-primary)" stop-opacity="0.0"/>
+            </linearGradient>
+          </defs>
+          <line x1="8" y1={svgHeight - 12} x2={svgWidth - 8} y2={svgHeight - 12} stroke="var(--color-border)" stroke-width="1" stroke-dasharray="2 2" />
+          <path d={areaD} fill={`url(#grad-${dataset.slug})`} />
+          <path d={pointsD} fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      )}
+
+      {chartInfo && barElements.length > 0 && (
+        <div class="mosaic-chart-header">
+          <span class="mosaic-chart-type">Distribución · {chartInfo.xKey}</span>
+          <span class="mosaic-chart-y">{chartInfo.yKey}</span>
+        </div>
+        <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} class="mosaic-svg" preserveAspectRatio="none">
+          <line x1="8" y1={svgHeight - 12} x2={svgWidth - 8} y2={svgHeight - 12} stroke="var(--color-border)" stroke-width="1" stroke-dasharray="2 2" />
+          {barElements.map((b) => (
+            <rect 
+              x={b.x.toFixed(1)} 
+              y={b.y.toFixed(1)} 
+              width={b.width.toFixed(1)} 
+              height={b.height.toFixed(1)} 
+              rx="2" 
+              fill="var(--color-secondary)"
+              opacity="0.85"
+            />
+          ))}
+        </svg>
+      )}
+
+      {!chartInfo && (
+        <div class="mosaic-chart-empty">
+          <span>{format} · Frictionless DataPackage</span>
+        </div>
+      )}
+    </div>
   </div>
 
   <div class="dataset-card-footer">
     <span class="dataset-card-resources">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
-      <span>{resCount}</span>
-      <span data-i18n="card.resources">recurso(s)</span>
+      <span>{resCount} recurso(s)</span>
     </span>
     <a href={`/datasets/${dataset.slug}`} class="btn btn-secondary btn-sm dataset-card-action">
-      <span data-i18n="card.explore">Explorar</span>
+      <span data-i18n="card.explore">Explorar Datos</span>
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
     </a>
   </div>

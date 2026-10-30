@@ -1,0 +1,891 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+
+// Cargar y pre-procesar datos desde los CSVs soberanos en knowledge/
+const rootDir = process.cwd();
+
+// 1. Calidad del aire (PM10)
+const pm10Path = path.join(rootDir, 'knowledge/nodes/concentracion-en-promedio-anual-de-material-particulado-en-suspension-pm10-segun-esta/data.csv');
+const pm10Raw = fs.readFileSync(pm10Path, 'utf-8');
+const pm10Lines = pm10Raw.trim().split('\n').slice(1);
+const pm10Rows = pm10Lines.map((l) => {
+  const parts = l.split(',');
+  return {
+    est: parts[1],
+    ano: parseInt(parts[3]),
+    val: parts[4] === 'n.d.' ? null : parseFloat(parts[4])
+  };
+});
+
+const pm10Years = [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024];
+const pm10Stations = [
+  { name: 'Tránsito (Centro)', code: 'Tránsito', color: '#9e1b2f' },
+  { name: 'Cotahuma (Ladera Oeste)', code: 'Cotahuma', color: '#0a5c36' },
+  { name: 'Cota Cota (Zona Sur)', code: 'Cota Cota', color: '#0284c7' },
+  { name: 'Villa Fátima (Yungas)', code: 'Villa Fátima', color: '#d97706' }
+];
+
+// Cálculo de coordenadas SVG para PM10 (viewBox 0 0 760 300)
+// Margen: izq 50, der 30, arriba 30, abajo 40. Ancho gráfico: 680, Alto: 230
+// X: de 2010 a 2024 (14 intervalos -> 680 / 14 = 48.57px)
+// Y: de 0 a 80 µg/m3 (230px -> escala 230 / 80 = 2.875 px por unidad)
+function getPm10Coord(year: number, val: number | null) {
+  const x = 50 + (year - 2010) * (680 / 14);
+  if (val === null) return null;
+  const y = 260 - val * (230 / 80);
+  return { x, y };
+}
+
+// 2. Permisos de construcción por Macrodistrito
+const permPath = path.join(rootDir, 'knowledge/nodes/aprobacion-de-permisos-de-construccion-segun-macrodistrito/data.csv');
+const permRaw = fs.readFileSync(permPath, 'utf-8');
+const permLines = permRaw.trim().split('\n').slice(1);
+const permRows = permLines.map((l) => {
+  const parts = l.split(',');
+  return {
+    macro: parts[1],
+    ano: parseInt(parts[2]),
+    num: parseInt(parts[3]) || 0
+  };
+});
+
+// Top Macrodistritos para el gráfico de barras
+const keyMacros = [
+  { name: 'Sur', color: '#9e1b2f' },
+  { name: 'Max Paredes', color: '#0a5c36' },
+  { name: 'Cotahuma', color: '#0284c7' },
+  { name: 'Centro', color: '#d97706' },
+  { name: 'San Antonio', color: '#7c3aed' }
+];
+
+// 3. Población por Macrodistrito (Censos 1992, 2001 y 2025 pry)
+const popPath = path.join(rootDir, 'knowledge/nodes/poblacion-segun-macrodistrito-y-distrito/data.csv');
+const popRaw = fs.readFileSync(popPath, 'utf-8');
+const popLines = popRaw.trim().split('\n').slice(1);
+const popByMacro: Record<string, { y1992: number; y2001: number; y2025: number }> = {};
+popLines.forEach((l) => {
+  const parts = l.split(',');
+  const m = parts[1];
+  const yr = parts[3];
+  const val = parseInt(parts[4]) || 0;
+  if (!popByMacro[m]) popByMacro[m] = { y1992: 0, y2001: 0, y2025: 0 };
+  if (yr === '1992') popByMacro[m].y1992 += val;
+  if (yr === '2001') popByMacro[m].y2001 += val;
+  if (yr === '2025 (pry)') popByMacro[m].y2025 += val;
+});
+
+const macroOrder = ['Max Paredes', 'Cotahuma', 'Periférica', 'Sur', 'San Antonio', 'Centro', 'Mallasa'];
+---
+
+<section class="owid-section" aria-labelledby="owid-heading">
+  <div class="owid-header-top">
+    <div class="owid-eyebrow">
+      <span class="owid-flag-dot"></span>
+      <span>EVIDENCIA Y VISUALIZACIÓN · CIUDAD DE LA PAZ</span>
+    </div>
+    <div class="owid-view-toggle">
+      <button type="button" class="owid-toggle-btn active" data-view="chart">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span>Gráfico</span>
+      </button>
+      <button type="button" class="owid-toggle-btn" data-view="table">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/></svg>
+        <span>Tabla</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Pestañas de Selección de Indicador -->
+  <div class="owid-tabs" role="tablist">
+    <button type="button" class="owid-tab-btn active" data-target="tab-pm10" role="tab" aria-selected="true">
+      <span class="tab-indicator-dot" style="background-color: #9e1b2f;"></span>
+      <span>Calidad del Aire (PM10)</span>
+    </button>
+    <button type="button" class="owid-tab-btn" data-target="tab-permisos" role="tab" aria-selected="false">
+      <span class="tab-indicator-dot" style="background-color: #0a5c36;"></span>
+      <span>Permisos de Construcción</span>
+    </button>
+    <button type="button" class="owid-tab-btn" data-target="tab-poblacion" role="tab" aria-selected="false">
+      <span class="tab-indicator-dot" style="background-color: #0284c7;"></span>
+      <span>Demografía por Macrodistrito</span>
+    </button>
+  </div>
+
+  <!-- Contenedor Principal del Gráfico estilo Our World in Data -->
+  <div class="owid-card">
+    
+    <!-- PANE 1: Calidad del Aire (PM10) -->
+    <div class="owid-pane active" id="tab-pm10">
+      <div class="owid-pane-header">
+        <h2 class="owid-chart-title" id="owid-heading">
+          ¿Cómo ha evolucionado la concentración de material particulado (PM10) en La Paz?
+        </h2>
+        <p class="owid-chart-subtitle">
+          Promedio anual de concentración de partículas PM10 en suspensión (µg/m³), medido por estaciones de monitoreo continuo de la Red MoniCA (2010–2024).
+        </p>
+        <div class="owid-callout">
+          <strong>Hallazgo clave:</strong> Durante las restricciones de movilidad de 2020 y 2023 se registraron los niveles mínimos históricos (13–14 µg/m³). En 2024, Villa Fátima (70 µg/m³) y Tránsito (62 µg/m³) alcanzaron picos altos atribuibles a factores atmosféricos estacionales y tráfico vehicular.
+        </div>
+      </div>
+
+      <!-- Leyenda interactiva -->
+      <div class="owid-legend">
+        {pm10Stations.map((st) => (
+          <div class="legend-item">
+            <span class="legend-color-line" style={`background-color: ${st.color};`}></span>
+            <span class="legend-label">{st.name}</span>
+          </div>
+        ))}
+        <div class="legend-item legend-ref">
+          <span class="legend-dashed-line"></span>
+          <span class="legend-label">Guía OMS (15 µg/m³)</span>
+        </div>
+      </div>
+
+      <!-- Gráfico SVG Vectorial Puro -->
+      <div class="owid-chart-viewport" data-chart-container="pm10">
+        <svg viewBox="0 0 760 300" class="owid-svg" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Gráfico de evolución temporal de PM10 en La Paz (2010 a 2024)">
+          <!-- Líneas de fondo / Cuadrícula -->
+          {[0, 20, 40, 60, 80].map((tickVal) => {
+            const y = 260 - tickVal * (230 / 80);
+            return (
+              <g class="grid-line-group">
+                <line x1="50" y1={y} x2="730" y2={y} stroke="var(--color-border)" stroke-width="1" stroke-dasharray="3 3" />
+                <text x="42" y={y + 4} text-anchor="end" class="chart-axis-label">{tickVal}</text>
+              </g>
+            );
+          })}
+
+          <!-- Línea de Referencia OMS (15 µg/m3) -->
+          <line x1="50" y1={260 - 15 * (230 / 80)} x2="730" y2={260 - 15 * (230 / 80)} stroke="#e11d48" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.85" />
+          <text x="725" y={260 - 15 * (230 / 80) - 6} text-anchor="end" fill="#e11d48" font-size="10" font-family="var(--font-mono)" font-weight="600">Límite Guía OMS (15)</text>
+
+          <!-- Eje X: Años -->
+          {pm10Years.map((yr, idx) => {
+            if (idx % 2 !== 0 && yr !== 2024) return null;
+            const x = 50 + (yr - 2010) * (680 / 14);
+            return (
+              <text x={x} y="285" text-anchor="middle" class="chart-axis-label">{yr}</text>
+            );
+          })}
+
+          <!-- Trazos por cada estación -->
+          {pm10Stations.map((st) => {
+            const points = [];
+            pm10Years.forEach((yr) => {
+              const row = pm10Rows.find((r) => r.est === st.code && r.ano === yr);
+              if (row && row.val !== null) {
+                const coord = getPm10Coord(yr, row.val);
+                if (coord) points.push({ x: coord.x, y: coord.y, val: row.val, yr });
+              }
+            });
+
+            const pathD = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
+
+            return (
+              <g class="series-group" data-series={st.code}>
+                <path d={pathD} fill="none" stroke={st.color} stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                {points.map((p) => (
+                  <circle 
+                    cx={p.x.toFixed(1)} 
+                    cy={p.y.toFixed(1)} 
+                    r="4" 
+                    fill="var(--color-surface)" 
+                    stroke={st.color} 
+                    stroke-width="2"
+                    class="chart-dot"
+                    data-tooltip={`${st.name}: ${p.val} µg/m³ (${p.yr})`}
+                  />
+                ))}
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+
+      <!-- Tabla de Datos Alternativa (Toggle OWID) -->
+      <div class="owid-table-container" style="display: none;">
+        <table class="owid-table">
+          <thead>
+            <tr>
+              <th>Año</th>
+              <th>Tránsito (Centro)</th>
+              <th>Cotahuma (Oeste)</th>
+              <th>Cota Cota (Sur)</th>
+              <th>Villa Fátima</th>
+            </tr>
+          </thead>
+          <tbody>
+            {pm10Years.map((yr) => {
+              const tr = pm10Rows.find((r) => r.est === 'Tránsito' && r.ano === yr)?.val;
+              const ch = pm10Rows.find((r) => r.est === 'Cotahuma' && r.ano === yr)?.val;
+              const cc = pm10Rows.find((r) => r.est === 'Cota Cota' && r.ano === yr)?.val;
+              const vf = pm10Rows.find((r) => r.est === 'Villa Fátima' && r.ano === yr)?.val;
+              return (
+                <tr>
+                  <td><strong>{yr}</strong></td>
+                  <td>{tr !== null && tr !== undefined ? `${tr} µg/m³` : 's/d'}</td>
+                  <td>{ch !== null && ch !== undefined ? `${ch} µg/m³` : 's/d'}</td>
+                  <td>{cc !== null && cc !== undefined ? `${cc} µg/m³` : 's/d'}</td>
+                  <td>{vf !== null && vf !== undefined ? `${vf} µg/m³` : 's/d'}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="owid-pane-footer">
+        <div class="owid-source">
+          <strong>Fuente:</strong> GAMLP — Red MoniCA (Monitoreo de Calidad del Aire)
+        </div>
+        <div class="owid-actions">
+          <a href="/datasets/concentracion-en-promedio-anual-de-material-particulado-en-suspension-pm10-segun-esta" class="owid-action-link">
+            <span>Explorar este dataset completo</span> &rarr;
+          </a>
+          <a href="/raw/nodes/concentracion-en-promedio-anual-de-material-particulado-en-suspension-pm10-segun-esta/data.csv" class="owid-action-link" download>
+            <span>Descargar CSV</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANE 2: Permisos de Construcción -->
+    <div class="owid-pane" id="tab-permisos" style="display: none;">
+      <div class="owid-pane-header">
+        <h2 class="owid-chart-title">
+          ¿Qué macrodistritos concentran los permisos de construcción en La Paz?
+        </h2>
+        <p class="owid-chart-subtitle">
+          Número anual de aprobaciones de permisos de construcción por macrodistrito municipal (2010–2024), reflejando la dinámica de inversión inmobiliaria y densificación urbana.
+        </p>
+        <div class="owid-callout">
+          <strong>Hallazgo clave:</strong> El Macrodistrito Sur lidera de manera sostenida el número de autorizaciones de edificación en el municipio (promediando más de 250 aprobaciones anuales), seguido históricamente por Max Paredes, Cotahuma y Centro.
+        </div>
+      </div>
+
+      <!-- Leyenda de Macrodistritos -->
+      <div class="owid-legend">
+        {keyMacros.map((m) => (
+          <div class="legend-item">
+            <span class="legend-color-box" style={`background-color: ${m.color};`}></span>
+            <span class="legend-label">Macrodistrito {m.name}</span>
+          </div>
+        ))}
+      </div>
+
+      <!-- Gráfico de Columnas agrupadas SVG -->
+      <div class="owid-chart-viewport" data-chart-container="permisos">
+        <svg viewBox="0 0 760 300" class="owid-svg" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Permisos de construcción por macrodistrito en La Paz">
+          <!-- Ticks Y: de 0 a 400 -->
+          {[0, 100, 200, 300, 400].map((tVal) => {
+            const y = 260 - tVal * (230 / 400);
+            return (
+              <g class="grid-line-group">
+                <line x1="50" y1={y} x2="730" y2={y} stroke="var(--color-border)" stroke-width="1" stroke-dasharray="3 3" />
+                <text x="42" y={y + 4} text-anchor="end" class="chart-axis-label">{tVal}</text>
+              </g>
+            );
+          })}
+
+          <!-- Barras por año (2010 a 2024) -->
+          {pm10Years.map((yr) => {
+            const groupX = 50 + (yr - 2010) * (680 / 15);
+            return (
+              <g class="bar-year-group">
+                <text x={groupX + 18} y="285" text-anchor="middle" class="chart-axis-label">{yr.toString().slice(2)}'</text>
+                {keyMacros.map((km, i) => {
+                  const item = permRows.find((r) => r.macro === km.name && r.ano === yr);
+                  const count = item ? item.num : 0;
+                  const barH = count * (230 / 400);
+                  const barY = 260 - barH;
+                  const barX = groupX + i * 7;
+                  return (
+                    <rect 
+                      x={barX} 
+                      y={barY} 
+                      width="6" 
+                      height={Math.max(barH, 1)} 
+                      rx="1" 
+                      fill={km.color}
+                      opacity="0.9"
+                      class="chart-bar"
+                      data-tooltip={`${km.name} (${yr}): ${count} permisos`}
+                    />
+                  );
+                })}
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+
+      <div class="owid-table-container" style="display: none;">
+        <table class="owid-table">
+          <thead>
+            <tr>
+              <th>Año</th>
+              <th>Sur</th>
+              <th>Max Paredes</th>
+              <th>Cotahuma</th>
+              <th>Centro</th>
+              <th>San Antonio</th>
+            </tr>
+          </thead>
+          <tbody>
+            {pm10Years.map((yr) => (
+              <tr>
+                <td><strong>{yr}</strong></td>
+                {keyMacros.map((km) => {
+                  const val = permRows.find((r) => r.macro === km.name && r.ano === yr)?.num || 0;
+                  return <td>{val}</td>;
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="owid-pane-footer">
+        <div class="owid-source">
+          <strong>Fuente:</strong> GAMLP — Sistema de Información Territorial (SIT) y Dirección de Administración Territorial
+        </div>
+        <div class="owid-actions">
+          <a href="/datasets/aprobacion-de-permisos-de-construccion-segun-macrodistrito" class="owid-action-link">
+            <span>Explorar este dataset completo</span> &rarr;
+          </a>
+          <a href="/raw/nodes/aprobacion-de-permisos-de-construccion-segun-macrodistrito/data.csv" class="owid-action-link" download>
+            <span>Descargar CSV</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANE 3: Población por Macrodistrito -->
+    <div class="owid-pane" id="tab-poblacion" style="display: none;">
+      <div class="owid-pane-header">
+        <h2 class="owid-chart-title">
+          ¿Cómo se distribuye la población entre los macrodistritos de la ciudad?
+        </h2>
+        <p class="owid-chart-subtitle">
+          Censos de Población y Vivienda (1992, 2001) y Proyección oficial municipal 2025 para los principales macrodistritos urbanos de La Paz.
+        </p>
+        <div class="owid-callout">
+          <strong>Hallazgo clave:</strong> Max Paredes, Cotahuma y Periférica concentran la mayor densidad demográfica urbana con cerca de 200.000 habitantes cada uno, mientras que el Macrodistrito Sur ha mostrado el crecimiento relativo más acelerado desde 1992.
+        </div>
+      </div>
+
+      <div class="owid-legend">
+        <div class="legend-item">
+          <span class="legend-color-box" style="background-color: #94a3b8;"></span>
+          <span class="legend-label">Censo 1992</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color-box" style="background-color: #0a5c36;"></span>
+          <span class="legend-label">Censo 2001</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color-box" style="background-color: #9e1b2f;"></span>
+          <span class="legend-label">Proyección 2025</span>
+        </div>
+      </div>
+
+      <!-- Gráfico Horizontal Dumbbell / Comparativo -->
+      <div class="owid-chart-viewport" data-chart-container="poblacion">
+        <svg viewBox="0 0 760 300" class="owid-svg" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Comparación de población por macrodistrito en La Paz">
+          <!-- Ticks X: de 0 a 220.000 habs -->
+          {[0, 50000, 100000, 150000, 200000].map((pVal) => {
+            const x = 140 + (pVal / 220000) * 580;
+            return (
+              <g class="grid-line-group">
+                <line x1={x} y1="20" x2={x} y2="260" stroke="var(--color-border)" stroke-width="1" stroke-dasharray="3 3" />
+                <text x={x} y="285" text-anchor="middle" class="chart-axis-label">{(pVal / 1000)}k</text>
+              </g>
+            );
+          })}
+
+          <!-- Filas por cada macrodistrito -->
+          {macroOrder.map((mName, idx) => {
+            const y = 40 + idx * 32;
+            const data = popByMacro[mName] || { y1992: 0, y2001: 0, y2025: 0 };
+            const x92 = 140 + (data.y1992 / 220000) * 580;
+            const x01 = 140 + (data.y2001 / 220000) * 580;
+            const x25 = 140 + (data.y2025 / 220000) * 580;
+
+            return (
+              <g class="macro-pop-row">
+                <text x="130" y={y + 5} text-anchor="end" class="chart-axis-label" font-weight="600">{mName}</text>
+                <!-- Línea conectora entre 1992 y 2025 -->
+                <line x1={x92} y1={y} x2={x25} y2={y} stroke="var(--color-border)" stroke-width="3" stroke-linecap="round" />
+                <!-- Punto 1992 -->
+                <circle cx={x92} cy={y} r="5" fill="#94a3b8" class="chart-dot" data-tooltip={`${mName} (1992): ${data.y1992.toLocaleString()} hab.`} />
+                <!-- Punto 2001 -->
+                <circle cx={x01} cy={y} r="6" fill="#0a5c36" class="chart-dot" data-tooltip={`${mName} (2001): ${data.y2001.toLocaleString()} hab.`} />
+                <!-- Punto 2025 -->
+                <circle cx={x25} cy={y} r="7" fill="#9e1b2f" class="chart-dot" data-tooltip={`${mName} (2025 pry): ${data.y2025.toLocaleString()} hab.`} />
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+
+      <div class="owid-table-container" style="display: none;">
+        <table class="owid-table">
+          <thead>
+            <tr>
+              <th>Macrodistrito</th>
+              <th>Censo 1992</th>
+              <th>Censo 2001</th>
+              <th>Proyección 2025</th>
+            </tr>
+          </thead>
+          <tbody>
+            {macroOrder.map((m) => {
+              const d = popByMacro[m];
+              return (
+                <tr>
+                  <td><strong>{m}</strong></td>
+                  <td>{d?.y1992.toLocaleString()} hab.</td>
+                  <td>{d?.y2001.toLocaleString()} hab.</td>
+                  <td>{d?.y2025.toLocaleString()} hab.</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="owid-pane-footer">
+        <div class="owid-source">
+          <strong>Fuente:</strong> GAMLP — Dirección de Investigación e Información Estadística sobre base de INE
+        </div>
+        <div class="owid-actions">
+          <a href="/datasets/poblacion-segun-macrodistrito-y-distrito" class="owid-action-link">
+            <span>Explorar este dataset completo</span> &rarr;
+          </a>
+          <a href="/raw/nodes/poblacion-segun-macrodistrito-y-distrito/data.csv" class="owid-action-link" download>
+            <span>Descargar CSV</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Tooltip dinámico flotante -->
+<div id="owid-tooltip" class="owid-floating-tooltip" style="display: none;"></div>
+
+<style>
+  .owid-section {
+    margin: 2.5rem 0 3.5rem;
+  }
+
+  .owid-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .owid-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .owid-flag-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    box-shadow: 0 0 0 2px var(--color-secondary-subtle);
+  }
+
+  .owid-view-toggle {
+    display: inline-flex;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 0.15rem;
+    gap: 0.2rem;
+  }
+
+  .owid-toggle-btn {
+    all: unset;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.775rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    color: var(--color-text-muted);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .owid-toggle-btn:hover {
+    color: var(--color-text);
+  }
+
+  .owid-toggle-btn.active {
+    background-color: var(--color-surface-hover);
+    color: var(--color-primary);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .owid-tabs {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .owid-tab-btn {
+    all: unset;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 0.95rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+  }
+
+  .owid-tab-btn:hover {
+    color: var(--color-text);
+    background-color: var(--color-surface-hover);
+  }
+
+  .owid-tab-btn.active {
+    color: #ffffff;
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
+  .owid-tab-btn.active .tab-indicator-dot {
+    background-color: #ffffff !important;
+  }
+
+  .tab-indicator-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+
+  /* Tarjeta OWID */
+  .owid-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+  }
+
+  .owid-pane {
+    padding: 1.75rem;
+  }
+
+  .owid-pane-header {
+    margin-bottom: 1.25rem;
+  }
+
+  .owid-chart-title {
+    font-family: var(--font-serif);
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.3;
+    margin-bottom: 0.4rem;
+  }
+
+  .owid-chart-subtitle {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin-bottom: 0.85rem;
+  }
+
+  .owid-callout {
+    background-color: var(--color-primary-subtle);
+    border-left: 3px solid var(--color-primary);
+    padding: 0.65rem 0.85rem;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.825rem;
+    line-height: 1.45;
+    color: var(--color-text);
+    margin-top: 0.75rem;
+  }
+
+  .owid-callout strong {
+    color: var(--color-primary);
+  }
+
+  .owid-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    align-items: center;
+    margin: 1rem 0;
+    padding: 0.65rem 0.85rem;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: 0.8rem;
+  }
+
+  .legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .legend-color-line {
+    width: 16px;
+    height: 3px;
+    border-radius: 2px;
+  }
+
+  .legend-color-box {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+
+  .legend-dashed-line {
+    width: 16px;
+    height: 0;
+    border-top: 2px dashed #e11d48;
+  }
+
+  .legend-label {
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  .owid-chart-viewport {
+    position: relative;
+    width: 100%;
+    margin: 1.25rem 0;
+    background-color: var(--color-surface);
+    border-radius: var(--radius-md);
+  }
+
+  .owid-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: visible;
+  }
+
+  .chart-axis-label {
+    fill: var(--color-text-muted);
+    font-size: 11px;
+    font-family: var(--font-mono);
+  }
+
+  .chart-dot {
+    cursor: pointer;
+    transition: transform 0.15s ease, r 0.15s ease;
+  }
+
+  .chart-dot:hover {
+    r: 6.5;
+  }
+
+  .chart-bar {
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+  }
+
+  .chart-bar:hover {
+    opacity: 1;
+    filter: brightness(1.15);
+  }
+
+  /* Tabla alternativa */
+  .owid-table-container {
+    max-height: 340px;
+    overflow-y: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    margin: 1.25rem 0;
+  }
+
+  .owid-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.825rem;
+    font-family: var(--font-sans);
+  }
+
+  .owid-table th {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    padding: 0.65rem 0.85rem;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+  }
+
+  .owid-table td {
+    padding: 0.55rem 0.85rem;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+  }
+
+  .owid-table tr:hover td {
+    background-color: var(--color-surface-hover);
+    color: var(--color-text);
+  }
+
+  /* Footer OWID */
+  .owid-pane-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--color-border);
+    padding-top: 1rem;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .owid-source {
+    color: var(--color-text-muted);
+  }
+
+  .owid-actions {
+    display: inline-flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .owid-action-link {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 600;
+    font-size: 0.825rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .owid-action-link:hover {
+    color: var(--color-primary-hover);
+  }
+
+  /* Floating Tooltip */
+  .owid-floating-tooltip {
+    position: fixed;
+    background-color: rgba(15, 23, 42, 0.95);
+    color: #ffffff;
+    padding: 0.35rem 0.65rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    pointer-events: none;
+    z-index: 100;
+    box-shadow: var(--shadow-md);
+    white-space: nowrap;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1. Selector de Pestañas
+    const tabBtns = document.querySelectorAll('.owid-tab-btn');
+    const panes = document.querySelectorAll('.owid-pane');
+
+    tabBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
+        tabBtns.forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+
+        panes.forEach((p) => {
+          if (p.id === targetId) {
+            p.style.display = 'block';
+            p.classList.add('active');
+          } else {
+            p.style.display = 'none';
+            p.classList.remove('active');
+          }
+        });
+      });
+    });
+
+    // 2. Alternador Gráfico / Tabla
+    const toggleBtns = document.querySelectorAll('.owid-toggle-btn');
+    toggleBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const view = btn.getAttribute('data-view');
+        toggleBtns.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        document.querySelectorAll('.owid-pane').forEach((pane) => {
+          const chartView = pane.querySelector('.owid-chart-viewport');
+          const tableView = pane.querySelector('.owid-table-container');
+          if (view === 'table') {
+            if (chartView) chartView.style.display = 'none';
+            if (tableView) tableView.style.display = 'block';
+          } else {
+            if (chartView) chartView.style.display = 'block';
+            if (tableView) tableView.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // 3. Hover Tooltip
+    const tooltip = document.getElementById('owid-tooltip');
+    const interactiveElements = document.querySelectorAll('.chart-dot, .chart-bar');
+
+    interactiveElements.forEach((el) => {
+      el.addEventListener('mouseenter', (e) => {
+        const text = el.getAttribute('data-tooltip');
+        if (!text || !tooltip) return;
+        tooltip.textContent = text;
+        tooltip.style.display = 'block';
+      });
+
+      el.addEventListener('mousemove', (e) => {
+        if (!tooltip) return;
+        tooltip.style.left = e.clientX + 12 + 'px';
+        tooltip.style.top = e.clientY - 28 + 'px';
+      });
+
+      el.addEventListener('mouseleave', () => {
+        if (tooltip) tooltip.style.display = 'none';
+      });
+    });
+  });
+</script>

@@ -31,7 +31,7 @@ export const GET: APIRoute = async () => {
   lines.push(``);
   lines.push(`## Enlaces Adicionales`);
   lines.push(`- [Compendio Completo llms-full.txt](/llms-full.txt): Todos los metadatos y esquemas concatenados para contexto largo.`);
-  lines.push(`- [Explorador Web](/datasets): Interfaz interactiva de búsqueda.`);
+  lines.push(`- [Catálogo Mosaico Web](/): Interfaz interactiva de búsqueda y visualización.`);
 
   return new Response(lines.join('\n'), {
     headers: {

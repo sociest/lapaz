@@ -1,0 +1,19 @@
+name: diagnostico-servicios-y-equipamiento-unidades-educativas
+title: DIAGNÓSTICO DE SERVICIOS BÁSICOS, COMPUTACIÓN Y ESTADO EDILICIO EN UNIDADES EDUCATIVAS
+description: Diagnóstico de 211 unidades educativas sobre cobertura de laboratorios de computación, acceso a internet, agua potable, saneamiento, rutas de evacuación y necesidades físicas.
+spatial:
+  country: BO
+  city: La Paz
+  granularity: unidad-educativa
+temporal:
+  start: '2024-01-01T00:00:00Z'
+  end: '2024-12-31T23:59:59Z'
+quality:
+  status: verified
+resources:
+- name: DIAGNÓSTICO DE SERVICIOS Y COMPUTACIÓN EN U.E.
+  type: table
+  path: ./data.csv
+  scheme: file
+  format: csv
+  mediatype: text/csv
